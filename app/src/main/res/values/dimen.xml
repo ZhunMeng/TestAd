@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="titleSize">20sp</dimen>
+    <dimen name="titleSizeMiddle">18sp</dimen>
+    <dimen name="subheadingSize">15sp</dimen>
+    <dimen name="titleSizeSmall">14sp</dimen>
+    <dimen name="buttonSize">15sp</dimen>
+    <dimen name="bodySize">14sp</dimen>
+    <dimen name="bigSize">30sp</dimen>
+    <dimen name="borderPadding">16dp</dimen>
+    <dimen name="borderPaddingSmall">8dp</dimen>
+    <dimen name="borderPaddingMiddle">10dp</dimen>
+    <dimen name="borderPaddingMini">2dp</dimen>
+    <dimen name="borderPaddingBig">18dp</dimen>
+    <dimen name="borderPadding36dp">36dp</dimen>
+    <dimen name="borderPadding48dp">48dp</dimen>
+    <dimen name="cornerRadius">8dp</dimen>
+    <dimen name="cornerRadiusSmall">4dp</dimen>
+</resources>

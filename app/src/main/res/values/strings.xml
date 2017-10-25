@@ -1,0 +1,67 @@
+<resources>
+    <string name="app_name">Admore</string>
+    <string name="admore">多点广告</string>
+    <string name="monitor">效果监测</string>
+    <string name="userCenter">用户中心</string>
+    <string name="balance">余额</string>
+    <string name="resourceBalance">可用资源包</string>
+    <string name="resource">资源包</string>
+    <string name="resourceFree">免费应用资源包</string>
+    <string name="resourcePay">付费应用资源包</string>
+    <string name="resourcePlay">PLAY资源包</string>
+    <string name="creditNum">信用额度</string>
+    <string name="resourceVoucher">资源包兑换卷</string>
+    <string name="resourcePurchase">资源包购买</string>
+    <string name="adSpread">试客推广</string>
+    <string name="spreadPlan">推广计划</string>
+    <string name="spreadCurrentDay">当日推广</string>
+    <string name="spreadHistory">推广历史</string>
+    <string name="spreadPlay">Play推广</string>
+    <string name="spreadCreate">创建推广</string>
+    <string name="spreadPlayPlan">Play计划</string>
+    <string name="spreadPlanCurrentDay">当日执行</string>
+    <string name="myOrder">我的订单</string>
+    <string name="orderRecord">交易记录</string>
+    <string name="resourceManagement">资源包管理</string>
+    <string name="invoiceManagement">发票管理</string>
+    <string name="appManagement">应用管理</string>
+    <string name="phone">客服电话</string>
+    <string name="certification">认证</string>
+    <string name="accountManagement">账号管理</string>
+    <string name="settings">设置</string>
+    <string name="messageConfig">消息设置</string>
+    <string name="clearCache">清除缓存</string>
+    <string name="aboutUs">关于我们</string>
+    <string name="encourage">鼓励</string>
+    <string name="exit">退出账号</string>
+
+    <string name="search">请输入搜索内容</string>
+    <string name="spreadTarget">推广目标</string>
+    <string name="selectTarget">点击选择推广目标</string><!---->
+    <string name="selectTarget1">选择您要推广的目标</string>
+    <string name="spreadExplain">请核对您的推广目标状态，如状态不符合将要发生变化请勿下单！以免造成损失</string>
+    <string name="free">免费</string>
+    <string name="addKeyword">添加关键词</string>
+    <string name="keyword">关键词</string>
+    <string name="limit">限量</string>
+    <string name="inputKeyword">请输入关键词</string>
+    <string name="inputSpreadNum">请输入推广次数</string>
+    <string name="inputStartDate">请选择起始日期</string>
+    <string name="inputEndDate">请选择结束日期</string>
+    <string name="inputStartDateTime">请选择起始时间</string>
+    <string name="inputEndDateTime">请选择结束时间</string>
+    <string name="inputCorrectDateTime">结束时间必须晚于起始时间</string>
+    <string name="num">/次</string>
+    <string name="spreadTime">推广时间</string>
+    <string name="spreadLongTerm">长期推广</string>
+    <string name="longTerm">长期</string>
+    <string name="addComplete">完成添加</string>
+    <string name="update">修改</string>
+    <string name="delete">删除</string>
+    <string name="unit_num">次/下载</string>
+    <string name="clickToExchange">点击兑换免费应用资源包</string>
+
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/admore"
+        android:icon="@drawable/ic_content_copy_black_24dp"
+        android:title="@string/admore" />
+    <item
+        android:id="@+id/monitor"
+        android:icon="@drawable/ic_insert_chart_black_24dp"
+        android:title="@string/monitor" />
+    <item
+        android:id="@+id/userCenter"
+        android:icon="@drawable/ic_perm_identity_black_24dp"
+        android:title="@string/userCenter" />
+</menu>

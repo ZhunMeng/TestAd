@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#4C5D6A</color>
+    <color name="colorPrimaryDark">#4C5D6A</color>
+    <color name="colorAccent">#248EFF</color>
+    <color name="redAccent">#FF4081</color>
+    <color name="unpressed">#A5B4BE</color>
+    <color name="unpressedLight">#F5F7F9</color>
+    <color name="unpressedAlpha6">#60A5B4BE</color>
+    <color name="dark">#465764</color>
+    <color name="blue">#248EFF</color>
+    <color name="yellow">#FF8500</color>
+    <color name="gray">#F1F3F5</color>
+    <color name="grayF2">#f2f2f2</color>
+    <color name="grayE8">#E8EDF0</color>
+    <color name="grayF1">#F1F4F7</color>
+    <color name="grayF9">#F9FAFC</color>
+
+    <color name="grayText">#8E8E93</color>
+    <color name="grayBorder">#DFE5EC</color>
+    <color name="grayText1">#9BA9B3</color>
+    <color name="grayText2">#C9D0D5</color>
+    <color name="grayArrow">#E4E8EE</color>
+    <color name="grayIcon">#D7D7D7</color>
+    <color name="green">#44DB5E</color>
+    <color name="red">#FF5D5C</color>
+    <color name="toolbarColor">#00000000</color>
+    <color name="translucent">#0C000000</color>
+    <color name="translucent_0a">#0A000000</color>
+    <color name="translucent_white">#99ffffff</color>
+
+
+    <color name="violet">#732BFB</color>
+    <color name="violetLight">#9055FF</color>
+
+    <color name="colorRed">#F8496B</color>
+    <color name="colorRedLight">#FF5D8C</color>
+
+    <color name="blueReally">#258EFF</color>
+    <color name="blueReallyLight">#12AFFF</color>
+
+</resources>
