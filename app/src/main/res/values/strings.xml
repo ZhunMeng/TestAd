@@ -14,7 +14,7 @@
     <string name="resourcePurchase">资源包购买</string>
     <string name="adSpread">试客推广</string>
     <string name="spreadPlan">推广计划</string>
-    <string name="spreadCurrentDay">当日推广</string>
+    <string name="spreadToday">当日推广</string>
     <string name="spreadHistory">推广历史</string>
     <string name="spreadPlay">Play推广</string>
     <string name="spreadCreate">创建推广</string>
@@ -35,7 +35,9 @@
     <string name="encourage">鼓励</string>
     <string name="exit">退出账号</string>
 
-    <string name="search">请输入搜索内容</string>
+    <string name="searchHint">请输入搜索内容</string>
+    <string name="search">搜索</string>
+    <string name="searchByIdAndName">请输入应用名或应用ID</string>
     <string name="spreadTarget">推广目标</string>
     <string name="selectTarget">点击选择推广目标</string><!---->
     <string name="selectTarget1">选择您要推广的目标</string>
@@ -60,6 +62,32 @@
     <string name="delete">删除</string>
     <string name="unit_num">次/下载</string>
     <string name="clickToExchange">点击兑换免费应用资源包</string>
+    <string name="hint">提示</string>
+    <string name="confirmPause">确定暂停计划?</string>
+    <string name="confirmStart">确定启用计划?</string>
+    <string name="confirm">确定</string>
+    <string name="cancel">取消</string>
+    <string name="spreadNow">正在投放</string>
+    <string name="spreadPause">暂停投放</string>
+    <string name="spreadStop">投放结束</string>
+
+    <string name="totalNum">投放总量</string>
+    <string name="clickNum">点击量</string>
+    <string name="downNum">下载量</string>
+    <string name="passNum">激活量</string>
+    <string name="completionRate">完成率</string>
+    <string name="activationRate">激活率</string>
+
+    <!--play-->
+    <string name="banner">BANNER</string>
+    <string name="selectBanner">点击选择Banner</string>
+    <string name="re_upload">重新上传</string>
+
+    <!--monitor-->
+    <string name="spreadPlanDetail">试客推广详情</string>
+
+
+    <string name="footerBehavior">com.duodian.admore.plan.today.FooterBehavior</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->

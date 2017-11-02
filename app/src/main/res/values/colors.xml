@@ -27,6 +27,8 @@
     <color name="toolbarColor">#00000000</color>
     <color name="translucent">#0C000000</color>
     <color name="translucent_0a">#0A000000</color>
+    <color name="translucent_dialog">#66000000</color>
+    <color name="translucent_ripple">#33000000</color>
     <color name="translucent_white">#99ffffff</color>
 
 

@@ -5,6 +5,7 @@
     <uses-permission android:name="aandroid.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -31,7 +32,12 @@
         <activity android:name=".main.BaseActivity" />
         <activity android:name=".main.admore.resourcebalance.ResourceBalanceActivity" />
         <activity android:name=".main.admore.spreadplancreate.SpreadPlanCreateActivity" />
-        <activity android:name=".main.admore.resourcevoucher.ResourceVoucherActivity"></activity>
+        <activity android:name=".main.admore.resourcevoucher.ResourceVoucherActivity" />
+        <activity android:name=".plan.list.PlanActivity" />
+        <activity android:name=".plan.today.PlanCurrentDayActivity" />
+        <activity android:name=".search.SearchActivity" />
+        <activity android:name=".play.PlayPlanCreateActivity" />
+        <activity android:name=".monitor.detail.MonitorDetailActivity"></activity>
     </application>
 
 </manifest>

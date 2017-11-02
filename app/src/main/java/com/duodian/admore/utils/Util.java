@@ -3,13 +3,17 @@ package com.duodian.admore.utils;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.net.Uri;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.provider.MediaStore;
 import android.provider.Settings;
 import android.renderscript.Allocation;
 import android.renderscript.RenderScript;
@@ -18,6 +22,10 @@ import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
 import android.telephony.TelephonyManager;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.SpannedString;
+import android.text.style.AbsoluteSizeSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
@@ -463,5 +471,89 @@ public class Util {
 
     public static String format(long time) {
         return new SimpleDateFormat("yyyy-mm-dd HH:mm", Locale.CHINA).format(time);
+
     }
+
+    public static String formatDate(long time) {
+        return new SimpleDateFormat("yyyy-mm-dd", Locale.CHINA).format(time);
+    }
+
+    public static void setHintTextSize(EditText editText, String hintText, int textSize) {
+        // 新建一个可以添加属性的文本对象
+        SpannableString ss = new SpannableString(hintText);
+        // 新建一个属性对象,设置文字的大小
+        AbsoluteSizeSpan ass = new AbsoluteSizeSpan(textSize, true);
+        // 附加属性到文本
+        ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+        // 设置hint
+        editText.setHint(new SpannedString(ss)); // 一定要进行转换,否则属性会消失
+    }
+
+    /**
+     * 计算图片的缩放值
+     *
+     * @param options
+     * @param reqWidth
+     * @param reqHeight
+     * @return
+     */
+    public static int calculateInSampleSize(BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+        if (height > reqHeight || width > reqWidth) {
+            final int heightRatio = Math.round((float) height
+                    / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        return inSampleSize;
+    }
+
+    /**
+     * 根据路径获得突破并压缩返回bitmap用于显示
+     *
+     * @param filePath
+     * @return
+     */
+    public static Bitmap getSmallBitmap(String filePath, int reqWidth, int reqHeight) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, options);
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeFile(filePath, options);
+    }
+
+    public static int getBitmapWidth(String filePath) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, options);
+        return options.outWidth;
+    }
+
+    public static int getBitmapHeight(String filePath) {
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeFile(filePath, options);
+        return options.outHeight;
+    }
+
+    public static String getRealPathFromURI(Context context, Uri contentURI) {
+        String result;
+        Cursor cursor = context.getContentResolver().query(contentURI, null, null, null, null);
+        if (cursor == null) {
+            // Source is Dropbox or other similar local file path
+            result = contentURI.getPath();
+        } else {
+            cursor.moveToFirst();
+            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+            result = cursor.getString(idx);
+            cursor.close();
+        }
+        return result;
+    }
+
+
 }

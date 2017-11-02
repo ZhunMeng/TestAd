@@ -2,7 +2,7 @@ package com.duodian.admore.bean;
 
 /**
  * Created by duodian on 2017/9/26.
- * 用户登录结果
+ * http result
  */
 
 public class HttpResult<T> {

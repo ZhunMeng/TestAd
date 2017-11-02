@@ -356,7 +356,7 @@ public class KeywordDialogFragment extends BottomSheetDialogFragment implements 
     }
 
 
-    interface KeywordListener {
+    public interface KeywordListener {
         void onKeywordSetup(KeywordParams keywordParams, int position);
     }
 

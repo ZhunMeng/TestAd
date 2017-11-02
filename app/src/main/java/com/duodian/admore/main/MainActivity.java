@@ -1,6 +1,5 @@
 package com.duodian.admore.main;
 
-import android.graphics.Color;
 import android.graphics.Outline;
 import android.os.Build;
 import android.support.annotation.NonNull;
@@ -14,7 +13,7 @@ import android.view.ViewOutlineProvider;
 
 import com.duodian.admore.R;
 import com.duodian.admore.main.admore.AdmoreFragment;
-import com.duodian.admore.main.monitor.MonitorFragment;
+import com.duodian.admore.monitor.MonitorFragment;
 import com.duodian.admore.main.usercenter.UserCenterFragment;
 import com.duodian.admore.utils.UiFlagUtil;
 

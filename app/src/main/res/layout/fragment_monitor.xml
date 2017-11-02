@@ -1,22 +1,22 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="com.duodian.admore.main.monitor.MonitorFragment">
+    android:orientation="vertical"
+    tools:context="com.duodian.admore.monitor.MonitorFragment">
 
     <LinearLayout
         android:id="@+id/linear_search"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:layout_marginBottom="8dp"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
         android:layout_marginTop="8dp"
         android:background="@drawable/shape_search"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:padding="8dp">
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="18sp"
@@ -33,4 +33,21 @@
             android:textColor="@color/grayText" />
     </LinearLayout>
 
-</FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1sp"
+        android:background="@color/grayF2" />
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+
+</LinearLayout>

@@ -117,9 +117,14 @@ public class VoucherFragment extends Fragment {
         return view;
     }
 
-    private void setRequestStatus(boolean isRequesting) {
-        this.isRequesting = isRequesting;
-        swipeRefreshLayout.setRefreshing(isRequesting);
+    private void setRequestStatus(final boolean requesting) {
+        getActivity().runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                isRequesting = requesting;
+                swipeRefreshLayout.setRefreshing(requesting);
+            }
+        });
     }
 
     private void getVouchers(final int rowNum) {

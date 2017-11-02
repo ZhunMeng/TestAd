@@ -16,6 +16,9 @@ import com.duodian.admore.main.admore.resourcevoucher.ResourceVoucherActivity;
 import com.duodian.admore.main.admore.spreadplancreate.SpreadPlanCreateActivity;
 import com.duodian.admore.main.admore.resourceachieve.ResourcePurchaseActivity;
 import com.duodian.admore.main.admore.resourcebalance.ResourceBalanceActivity;
+import com.duodian.admore.plan.list.PlanActivity;
+import com.duodian.admore.plan.today.PlanCurrentDayActivity;
+import com.duodian.admore.play.PlayPlanCreateActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -161,12 +164,15 @@ public class AdmoreFragment extends BaseFragment implements View.OnClickListener
                 intent = new Intent(getActivity(), SpreadPlanCreateActivity.class);
                 break;
             case R.id.linearLayout_spreadPlan:
+                intent = new Intent(getActivity(), PlanActivity.class);
                 break;
             case R.id.linearLayout_spreadCurrentDay:
+                intent = new Intent(getActivity(), PlanCurrentDayActivity.class);
                 break;
             case R.id.linearLayout_spreadHistory:
                 break;
             case R.id.linearLayout_spreadPlayCreate:
+                intent = new Intent(getActivity(), PlayPlanCreateActivity.class);
                 break;
             case R.id.linearLayout_spreadPlayPlan:
                 break;

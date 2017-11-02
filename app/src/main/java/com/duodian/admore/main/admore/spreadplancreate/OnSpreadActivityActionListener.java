@@ -6,13 +6,11 @@ package com.duodian.admore.main.admore.spreadplancreate;
  */
 
 
-interface OnSpreadActivityActionListener {
+public interface OnSpreadActivityActionListener {
 
     /**
      * 修改keyword
-     *
-     * @param keywordParams
-     */
+     **/
     void onUpdateKeyword(KeywordParams keywordParams, int position);
 
 
