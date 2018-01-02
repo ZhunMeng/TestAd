@@ -1,4 +1,4 @@
-package com.duodian.admore.main.admore.resourceachieve;
+package com.duodian.admore.main.home.resourcepurchase;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +10,6 @@ public class ResourcePurchaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_buy_resource);
+        setContentView(R.layout.activity_purchase_resource);
     }
 }

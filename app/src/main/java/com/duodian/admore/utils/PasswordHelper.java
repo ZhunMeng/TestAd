@@ -41,7 +41,7 @@ public class PasswordHelper {
         return buf.toString();
     }
 
-    public static void main(String[] args) {
-        System.out.println(PasswordHelper.encodePassword("123456789"));
-    }
+//    public static void main(String[] args) {
+//        System.out.println(PasswordHelper.encodePassword("123456789"));
+//    }
 }

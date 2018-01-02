@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.duodian.admore.main.admore.spreadplancreate.SpreadPlanCreateActivity">
+    tools:context=".plan.create.SpreadPlanCreateActivity">
 
 
     <include layout="@layout/layout_toolbar" />
@@ -34,7 +34,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="?selectableItemBackground"
             android:gravity="center"
             android:text="@string/selectTarget" />
 
@@ -42,7 +41,6 @@
             android:id="@+id/linear_selected"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:padding="@dimen/borderPaddingSmall"
@@ -83,6 +81,7 @@
         android:orientation="horizontal">
 
         <ImageView
+            android:id="@+id/imageView_explain"
             android:layout_width="12sp"
             android:layout_height="12sp"
             android:layout_marginRight="4dp"
@@ -90,6 +89,7 @@
             android:tint="@color/grayText" />
 
         <TextView
+            android:id="@+id/textView_spreadExplain"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spreadExplain"
@@ -126,7 +126,8 @@
             android:background="@drawable/shape_gradient_round_corner_blue"
             android:stateListAnimator="@drawable/selector_elevation"
             android:text="@string/spreadCreate"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/titleSizeMiddle" />
 
     </FrameLayout>
 

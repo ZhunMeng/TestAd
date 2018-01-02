@@ -1,4 +1,4 @@
-package com.duodian.admore.main.admore.spreadplancreate;
+package com.duodian.admore.plan.create;
 
 import java.io.Serializable;
 

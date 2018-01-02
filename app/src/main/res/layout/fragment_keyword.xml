@@ -70,6 +70,7 @@
                 android:hint="@string/inputKeyword"
                 android:lines="1"
                 android:padding="@dimen/borderPaddingMiddle"
+                android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
 
@@ -86,7 +87,9 @@
                 android:hint="@string/num"
                 android:inputType="number"
                 android:lines="1"
+                android:maxLength="8"
                 android:padding="@dimen/borderPaddingMiddle"
+                android:singleLine="true"
                 android:textColor="@android:color/black"
                 android:textSize="14sp" />
         </LinearLayout>
@@ -103,7 +106,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
-                android:text="@string/spreadTime"
+                android:text="@string/spreadDateTime"
                 android:textColor="@color/grayText1"
                 android:textSize="12sp" />
 

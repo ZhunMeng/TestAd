@@ -6,6 +6,7 @@ import android.view.View;
 
 /**
  * Created by duodian on 2017/10/11.
+ * UiFlagUtil
  */
 
 public class UiFlagUtil {

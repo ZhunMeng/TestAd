@@ -1,6 +1,7 @@
 package com.duodian.admore.customview;
 
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
@@ -25,6 +26,7 @@ public class ClockView extends View {
     private Point centerPoint;//圆心
     private RectF rectF;
     private RectF rectFCircle;
+    private int pointerColor;
 
 
     public ClockView(Context context) {
@@ -37,6 +39,10 @@ public class ClockView extends View {
 
     public ClockView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.ClockView, defStyleAttr, 0);
+        pointerColor = a.getColor(R.styleable.ClockView_pointer_color, context.getResources().getColor(R.color.blue));
+        a.recycle();
         init();
     }
 
@@ -62,10 +68,10 @@ public class ClockView extends View {
           周边虚线
          */
         paint.setColor(getResources().getColor(R.color.colorPrimary));
-        paint.setStrokeWidth(1);
-        paint.setPathEffect(dashPathEffect);
-        canvas.drawRoundRect(rectF, 8, 8, paint);
-        paint.setPathEffect(null);
+//        paint.setStrokeWidth(1);
+//        paint.setPathEffect(dashPathEffect);
+//        canvas.drawRoundRect(rectF, 8, 8, paint);
+//        paint.setPathEffect(null);
 
         /*
           圆圈
@@ -77,9 +83,9 @@ public class ClockView extends View {
         /*
           指针
          */
-        paint.setColor(getResources().getColor(R.color.blue));
-        canvas.drawLine(centerPoint.x, centerPoint.y, centerPoint.x, centerPoint.y - 30, paint);
+        paint.setColor(pointerColor);
+        canvas.drawLine(centerPoint.x, centerPoint.y, centerPoint.x, centerPoint.y - 20, paint);
         canvas.rotate(135, centerPoint.x, centerPoint.y);
-        canvas.drawLine(centerPoint.x, centerPoint.y, centerPoint.x, centerPoint.y - 30, paint);
+        canvas.drawLine(centerPoint.x, centerPoint.y, centerPoint.x, centerPoint.y - 20, paint);
     }
 }

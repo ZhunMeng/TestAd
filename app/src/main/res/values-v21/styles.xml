@@ -8,5 +8,6 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:actionBarStyle">@style/ActionButtonStyle</item>
+        <item name="android:listDivider">@drawable/shape_list_divider</item>
     </style>
 </resources>

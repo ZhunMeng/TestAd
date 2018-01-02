@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.duodian.admore.plan.list.PlanActivity">
+    tools:context="com.duodian.admore.plan.list.PlanListActivity">
 
     <include layout="@layout/layout_toolbar" />
 

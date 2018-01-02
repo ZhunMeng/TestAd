@@ -6,24 +6,13 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context=".main.usercenter.settings.SettingsActivity">
+    tools:context=".settings.SettingsActivity">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="@string/settings"
-            android:textSize="@dimen/titleSize" />
-    </android.support.v7.widget.Toolbar>
+    <include layout="@layout/layout_toolbar" />
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="18dp"
         android:background="@color/unpressedLight" />
 
     <LinearLayout
@@ -40,18 +29,18 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
             android:text="@string/messageConfig"
-            android:textSize="@dimen/subheadingSize" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/titleSizeSmall" />
 
-        <ImageView
+        <Switch
+            android:id="@+id/switch_message"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_navigate_next_black_24dp"
-            android:tint="@color/grayIcon" />
+            android:layout_height="wrap_content" />
     </LinearLayout>
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="18dp"
         android:background="@color/unpressedLight" />
 
     <LinearLayout
@@ -67,8 +56,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
-            android:textSize="@dimen/subheadingSize"
-            android:text="@string/clearCache" />
+            android:text="@string/clearCache"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/titleSizeSmall" />
 
         <TextView
             android:id="@+id/textView_CacheSize"
@@ -78,7 +68,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="18dp"
         android:background="@color/unpressedLight" />
 
     <LinearLayout
@@ -94,8 +84,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
-            android:textSize="@dimen/subheadingSize"
-            android:text="@string/aboutUs" />
+            android:text="@string/aboutUs"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/titleSizeSmall" />
+
 
         <ImageView
             android:layout_width="wrap_content"
@@ -103,6 +95,11 @@
             android:src="@drawable/ic_navigate_next_black_24dp"
             android:tint="@color/grayIcon" />
     </LinearLayout>
+
+    <!--<View-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="1sp"-->
+    <!--android:background="@color/unpressedLight" />-->
 
     <LinearLayout
         android:id="@+id/linear_encourage"
@@ -117,8 +114,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
-            android:textSize="@dimen/subheadingSize"
-            android:text="@string/encourage" />
+            android:text="@string/encourage"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/titleSizeSmall" />
 
         <ImageView
             android:layout_width="wrap_content"
@@ -129,7 +127,7 @@
 
     <View
         android:layout_width="match_parent"
-        android:layout_height="10dp"
+        android:layout_height="18dp"
         android:background="@color/unpressedLight" />
 
     <LinearLayout
@@ -146,8 +144,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1.0"
             android:text="@string/exit"
-            android:textSize="@dimen/subheadingSize"
-            android:textColor="@color/red" />
+            android:textColor="@color/red"
+            android:textSize="@dimen/titleSizeSmall" />
 
         <ImageView
             android:layout_width="wrap_content"

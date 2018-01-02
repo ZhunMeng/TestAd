@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.duodian.admore.main.admore.resourcevoucher.VoucherView
+        <com.duodian.admore.main.home.resourcevoucher.VoucherView
             android:id="@+id/voucherView"
             android:layout_width="match_parent"
             android:layout_height="128dp" />

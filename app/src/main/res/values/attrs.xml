@@ -5,6 +5,16 @@
         <attr name="plus_color" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="ClockView">
+        <attr name="pointer_color" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="MonitorDetailView">
+        <attr name="draw_color" format="color" />
+        <attr name="circle_color" format="color" />
+        <attr name="stroke_width" format="dimension" />
+    </declare-styleable>
+
     <declare-styleable name="PlanView">
         <attr name="plan_color" format="color" />
     </declare-styleable>

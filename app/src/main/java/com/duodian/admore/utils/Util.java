@@ -3,10 +3,13 @@ package com.duodian.admore.utils;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.content.res.ColorStateList;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
+import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -18,14 +21,18 @@ import android.provider.Settings;
 import android.renderscript.Allocation;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.support.annotation.ColorRes;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
+import android.support.v7.content.res.AppCompatResources;
 import android.telephony.TelephonyManager;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.SpannedString;
 import android.text.style.AbsoluteSizeSpan;
+import android.text.style.StyleSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.util.TypedValue;
@@ -33,11 +40,10 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-
-import com.duodian.admore.config.Config;
 import com.duodian.admore.config.Global;
 
 import java.io.ByteArrayInputStream;
@@ -53,6 +59,7 @@ import java.text.SimpleDateFormat;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Locale;
+
 
 /**
  * Created by duodian on 2017/9/27.
@@ -76,7 +83,7 @@ public class Util {
 
     public static String getAppVersion(Context context) {
         try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
+            return context.getApplicationContext().getPackageManager().getPackageInfo(context.getPackageName(), 0).versionName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
             return "-1";
@@ -85,7 +92,7 @@ public class Util {
 
     public static String getPackageName(Context context) {
         try {
-            return context.getPackageManager().getPackageInfo(context.getPackageName(), 0).packageName;
+            return context.getApplicationContext().getPackageManager().getPackageInfo(context.getApplicationContext().getPackageName(), 0).packageName;
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
             return "-1";
@@ -114,11 +121,11 @@ public class Util {
     }
 
     public static int getScreenWidth(Context context) {
-        return context.getResources().getDisplayMetrics().widthPixels;
+        return context.getApplicationContext().getResources().getDisplayMetrics().widthPixels;
     }
 
     public static int getScreenHeight(Context context) {
-        return context.getResources().getDisplayMetrics().heightPixels;
+        return context.getApplicationContext().getResources().getDisplayMetrics().heightPixels;
     }
 
     public static String getResolution(Context context) {
@@ -257,7 +264,7 @@ public class Util {
 
     public static HashMap<String, String> getHeaders(Context context) {
         HashMap<String, String> headers = new HashMap<>();
-        headers.put(Global.APP_VERSION, Config.APP_VERSION);
+        headers.put(Global.APP_VERSION, Global.APP_VERSION_NUM);
         headers.put(Global.ANDROID_ID, getAndroidId(context));
         headers.put(Global.USER_AGENT, new WebView(context).getSettings().getUserAgentString());
         return headers;
@@ -266,7 +273,6 @@ public class Util {
     public static HashMap<String, String> getBaseParams(Context context) {
         long time = System.currentTimeMillis();
         if (baseParamMap == null) {
-
             baseParamMap = new HashMap<>();
             baseParamMap.put(Global.ANDROID_ID, getAndroidId(context));
             baseParamMap.put(Global.DEVICE_IMEI, getDeviceId(context));
@@ -277,20 +283,22 @@ public class Util {
             baseParamMap.put(Global.DEVICE_PLATFORM, "Android");
             baseParamMap.put(Global.PHONE_NUMBER, getPhoneNumber(context));
             baseParamMap.put(Global.OS_VERSION, Build.VERSION.RELEASE);
-            baseParamMap.put(Global.IP, getIP(context));
+            baseParamMap.put(Global.X_IP, getIP(context));
             baseParamMap.put(Global.NET, getNetworkState(context));
             baseParamMap.put(Global.MAC, getMacAddress(context));
             baseParamMap.put(Global.APP_PACKAGE, getPackageName(context));
-            baseParamMap.put(Global.VERSION_CODE, getAppVersion(context));
+            baseParamMap.put(Global.VERSION, getAppVersion(context));
+            baseParamMap.put(Global.IP, getIP(context));
+            baseParamMap.put(Global.UA, new WebView(context.getApplicationContext()).getSettings().getUserAgentString());
             baseParamMap.put(Global.RESOLUTION, getResolution(context));
             baseParamMap.put(Global.LATITUDE, getLatitude());
             baseParamMap.put(Global.LONGITUDE, getLongitude());
         }
-        Log.e("Util", System.currentTimeMillis() - time + "create");
-        for (String key : baseParamMap.keySet()) {
-            Log.e("Util", key + "==>" + baseParamMap.get(key));
-        }
-        Log.e("Util", "******************");
+        Log.e("Util", System.currentTimeMillis() - time + "getBaseParamsTimeUsed");
+//        for (String key : baseParamMap.keySet()) {
+//            Log.e("Util", key + "==>" + baseParamMap.get(key));
+//        }
+//        Log.e("Util", "******************");
         long time1 = System.currentTimeMillis();
         HashMap<String, String> hashMap = (HashMap<String, String>) baseParamMap.clone();
         Log.e("Util", System.currentTimeMillis() - time1 + "clone");
@@ -470,12 +478,12 @@ public class Util {
     }
 
     public static String format(long time) {
-        return new SimpleDateFormat("yyyy-mm-dd HH:mm", Locale.CHINA).format(time);
+        return new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA).format(time);
 
     }
 
     public static String formatDate(long time) {
-        return new SimpleDateFormat("yyyy-mm-dd", Locale.CHINA).format(time);
+        return new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA).format(time);
     }
 
     public static void setHintTextSize(EditText editText, String hintText, int textSize) {
@@ -485,7 +493,7 @@ public class Util {
         AbsoluteSizeSpan ass = new AbsoluteSizeSpan(textSize, true);
         // 附加属性到文本
         ss.setSpan(ass, 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-
+//        ss.setSpan(new StyleSpan(Typeface.NORMAL), 0, ss.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         // 设置hint
         editText.setHint(new SpannedString(ss)); // 一定要进行转换,否则属性会消失
     }
@@ -544,7 +552,7 @@ public class Util {
         String result;
         Cursor cursor = context.getContentResolver().query(contentURI, null, null, null, null);
         if (cursor == null) {
-            // Source is Dropbox or other similar local file path
+            // Source is Dropbox? or other similar local file path
             result = contentURI.getPath();
         } else {
             cursor.moveToFirst();
@@ -553,6 +561,13 @@ public class Util {
             cursor.close();
         }
         return result;
+    }
+
+    public static void setImageTint(Context context, ImageView imageView, @ColorRes int color) {
+        ColorStateList csl = AppCompatResources.getColorStateList(context.getApplicationContext(), color);
+        Drawable drawable = DrawableCompat.wrap(imageView.getDrawable());
+        DrawableCompat.setTintList(drawable, csl);
+        imageView.setImageDrawable(drawable);
     }
 
 

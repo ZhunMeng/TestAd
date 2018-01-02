@@ -3,38 +3,38 @@ package com.duodian.admore.monitor;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.duodian.admore.R;
 import com.duodian.admore.bean.HttpResult;
+import com.duodian.admore.config.Global;
 import com.duodian.admore.http.IServiceApi;
 import com.duodian.admore.http.RetrofitUtil;
 import com.duodian.admore.main.BaseFragment;
+import com.duodian.admore.main.MainActivity;
 import com.duodian.admore.monitor.bean.MonitorPlanDateInfo;
 import com.duodian.admore.monitor.bean.MonitorPlanInfo;
 import com.duodian.admore.monitor.bean.MonitorPlanListInfo;
 import com.duodian.admore.monitor.bean.OnMonitorPlanActionListener;
-import com.duodian.admore.plan.PlanListAdapter;
-import com.duodian.admore.plan.bean.PlanAppInfo;
-import com.duodian.admore.plan.bean.PlanKeywordInfo;
-import com.duodian.admore.plan.bean.PlanListInfo;
+import com.duodian.admore.monitor.detail.MonitorDetailActivity;
 import com.duodian.admore.search.SearchActivity;
 import com.duodian.admore.utils.LogUtil;
+import com.duodian.admore.utils.SharedPreferenceUtil;
+import com.duodian.admore.utils.ToastUtil;
 import com.duodian.admore.utils.Util;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -45,40 +45,16 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link MonitorFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class MonitorFragment extends BaseFragment implements OnMonitorPlanActionListener {
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+
     private static final String TAG = "MonitorFragment";
 
-    private String mParam1;
-    private String mParam2;
-
-
     public MonitorFragment() {
-        // Required empty public constructor
-    }
-
-    public static MonitorFragment newInstance(String param1, String param2) {
-        MonitorFragment fragment = new MonitorFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
 
@@ -96,8 +72,10 @@ public class MonitorFragment extends BaseFragment implements OnMonitorPlanAction
     private MonitorPlanListAdapter monitorPlanListAdapter;
     private LinearLayoutManager linearLayoutManager;
 
-    private int pageRowNum;//起始查询行数
+    private int currentListNum;//当前list size
     private boolean isRequesting;
+    private int totalNum;
+    private int pageNum;//起始查询行数 /当前行数
 
 
     @Override
@@ -125,6 +103,7 @@ public class MonitorFragment extends BaseFragment implements OnMonitorPlanAction
     private void initViews() {
         linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayoutManager.VERTICAL));
         monitorPlanInfoList = new ArrayList<>();
         monitorPlanListAdapter = new MonitorPlanListAdapter(getContext(), monitorPlanInfoList);
         monitorPlanListAdapter.setOnMonitorPlanActionListener(this);
@@ -146,22 +125,18 @@ public class MonitorFragment extends BaseFragment implements OnMonitorPlanAction
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
+                if (pageNum >= totalNum) return;
                 int totalCount = linearLayoutManager.getItemCount();
                 int visibleItemCount = recyclerView.getChildCount();
                 int firstVisibleItemPosition = linearLayoutManager.findFirstVisibleItemPosition();
                 if (totalCount - 1 <= visibleItemCount + firstVisibleItemPosition) {
-                    getPlans(pageRowNum);
+                    getPlans(pageNum);
                 }
             }
         });
 
     }
 
-    @Override
-    public void onClick(int position) {
-
-    }
 
     private void setRequestStatus(final boolean requesting) {
         getActivity().runOnUiThread(new Runnable() {
@@ -176,8 +151,9 @@ public class MonitorFragment extends BaseFragment implements OnMonitorPlanAction
     private void getPlans(final int rowNum) {
         if (isRequesting) return;
         setRequestStatus(true);
-        IServiceApi iServiceApi = RetrofitUtil.getServiceApi(getContext().getApplicationContext());
-        HashMap<String, String> params = Util.getBaseParams(getContext().getApplicationContext());
+        IServiceApi iServiceApi = RetrofitUtil.getServiceApi(getActivity().getApplicationContext());
+        HashMap<String, String> params = Util.getBaseParams(getActivity().getApplicationContext());
+        params.put("identifier", Global.userInfo.getIdentifier());
         params.put("page", String.valueOf(rowNum));
         Observable<HttpResult<MonitorPlanListInfo>> observable = iServiceApi.monitorPlanList(params, System.currentTimeMillis());
         observable.subscribeOn(Schedulers.newThread())
@@ -185,72 +161,97 @@ public class MonitorFragment extends BaseFragment implements OnMonitorPlanAction
                 .subscribe(new Observer<HttpResult<MonitorPlanListInfo>>() {
                     @Override
                     public void onSubscribe(@NonNull Disposable d) {
-
+                        LogUtil.e(TAG, "onSubscribe");
                     }
 
                     @Override
                     public void onNext(@NonNull HttpResult<MonitorPlanListInfo> monitorPlanListInfoHttpResult) {
-                        List<MonitorPlanDateInfo> monitorPlanDateInfo = monitorPlanListInfoHttpResult.getResult().getRows();
-                        for (int i = 0; i < monitorPlanDateInfo.size(); i++) {
-                            MonitorPlanInfo monitorPlanInfo = new MonitorPlanInfo();
-                            monitorPlanInfo.setYmd(monitorPlanDateInfo.get(i).getYmd());
-                            monitorPlanInfo.setItemType(MonitorPlanInfo.TYPE_TITLE);
-                            monitorPlanInfoList.add(monitorPlanInfo);
-                            monitorPlanInfoList.addAll(monitorPlanDateInfo.get(i).getPlanDataList());
+                        LogUtil.e(TAG, "onNext");
+                        if (shouldReLogin(monitorPlanListInfoHttpResult.getCode())) {//code 403 重新登录
+                            return;
                         }
 
-                        if (rowNum == 0) {//第一次加载或者重新加载
-                            monitorPlanInfoList.clear();
-                            monitorPlanListAdapter.notifyDataSetChanged();
+                        if (monitorPlanListInfoHttpResult.getResult() != null) {
+                            totalNum = monitorPlanListInfoHttpResult.getResult().getTotal();
                         }
-                        monitorPlanListAdapter.notifyItemRangeInserted(pageRowNum, monitorPlanInfoList.size() - pageRowNum);
-                        pageRowNum = monitorPlanInfoList.size() - 1;
+                        List<MonitorPlanDateInfo> monitorPlanDateInfoList = monitorPlanListInfoHttpResult.getResult().getRows();
+                        if (monitorPlanDateInfoList == null) return;
+                        if (rowNum == 0) {//第一次加载或者重新加载
+                            pageNum = 0;
+                            monitorPlanInfoList.clear();
+                            monitorPlanListAdapter.notifyItemRemoved(0);
+                            currentListNum = 0;
+                            if (monitorPlanDateInfoList.size() == 0) {
+                                ToastUtil.showToast(getActivity().getApplicationContext(), "没有数据", Toast.LENGTH_LONG);
+                                return;
+                            }
+                        }
+                        pageNum += monitorPlanDateInfoList.size();
+                        for (int i = 0; i < monitorPlanDateInfoList.size(); i++) {
+                            MonitorPlanInfo monitorPlanInfo = new MonitorPlanInfo();
+                            monitorPlanInfo.setYmd(monitorPlanDateInfoList.get(i).getYmd());
+                            monitorPlanInfo.setItemType(MonitorPlanInfo.TYPE_TITLE);
+                            monitorPlanInfoList.add(monitorPlanInfo);
+                            for (MonitorPlanInfo monitorPlanInfo1 : monitorPlanDateInfoList.get(i).getPlanDataList()) {
+                                if (monitorPlanInfo1.getPassNum() == 0) {
+                                    monitorPlanInfo1.setActivationRate("0.0%");
+
+                                } else {
+                                    monitorPlanInfo1.setActivationRate(
+                                            String.format(Locale.CHINA,
+                                                    "%.1f%%",
+                                                    monitorPlanInfo1.getPassNum() * 100.0 / monitorPlanInfo1.getDownNum()));
+
+                                }
+
+                                monitorPlanInfo1.setCompletionRate(
+                                        String.format(Locale.CHINA,
+                                                "%.1f%%",
+                                                monitorPlanInfo1.getPassNum() * 100.0 / monitorPlanInfo1.getTotalNum()));
+                            }
+                            monitorPlanInfoList.addAll(monitorPlanDateInfoList.get(i).getPlanDataList());
+                        }
+//                        monitorPlanListAdapter.notifyItemRangeInserted(currentListNum, monitorPlanInfoList.size() - currentListNum);
+                        monitorPlanListAdapter.notifyDataSetChanged();
+                        currentListNum = monitorPlanInfoList.size() - 1;
                         setRequestStatus(false);
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        getActivity().runOnUiThread(new Runnable() {
-                            @Override
-                            public void run() {
-                                if (rowNum == 0) {//第一次加载或者重新加载
-                                    monitorPlanInfoList.clear();
-                                    monitorPlanListAdapter.notifyDataSetChanged();
-                                }
-                                for (int i = 0; i < 20; i++) {
-                                    MonitorPlanInfo monitorPlanInfo = new MonitorPlanInfo();
-                                    monitorPlanInfo.setYmd("2017-11-1");
-                                    if (i % 3 == 0) {
-                                        monitorPlanInfo.setItemType(MonitorPlanInfo.TYPE_TITLE);
-                                    } else {
-                                        monitorPlanInfo.setSmallIcon("http://is3.mzstatic.com/image/thumb/Purple128/v4/43/56/ea/4356eab8-0b17-909e-180b-d67c40cad4da/source/60x60bb.jpg");
-                                        monitorPlanInfo.setTrackName("旅行");
-                                        monitorPlanInfo.setItemType(PlanKeywordInfo.TYPE_ITEM);
-                                        monitorPlanInfo.setTotalNum(8000);
-                                        monitorPlanInfo.setClickNum(2000);
-                                        monitorPlanInfo.setDownNum(1000);
-                                        monitorPlanInfo.setPassNum(1000);
-                                        monitorPlanInfo.setCompletionRate("25%");
-                                        monitorPlanInfo.setActivationRate("12.5%");
-
-                                    }
-                                    monitorPlanInfoList.add(monitorPlanInfo);
-                                }
-                                monitorPlanListAdapter.notifyItemRangeInserted(pageRowNum, 20);
-                                pageRowNum += 20;
-                                setRequestStatus(false);
-                            }
-                        });
-
+                        LogUtil.e(TAG, "onError");
                         setRequestStatus(false);
                     }
 
                     @Override
                     public void onComplete() {
+                        LogUtil.e(TAG, "onComplete");
                         setRequestStatus(false);
                     }
                 });
     }
 
+
+    @Override
+    public void onClick(MonitorPlanInfo monitorPlanInfo) {
+        Intent intent = new Intent(getActivity(), MonitorDetailActivity.class);
+        intent.putExtra(MonitorPlanInfo.TAG, monitorPlanInfo);
+        startActivity(intent);
+    }
+
+    private boolean shouldReLogin(String code) {
+        if ("403".equalsIgnoreCase(code)) {
+            SharedPreferenceUtil.getInstance(getActivity()).clear();
+            Global.userInfo = null;
+            Intent intent = new Intent(getActivity(), MainActivity.class);
+            intent.putExtra(Global.LOGOUT, true);
+            startActivity(intent);
+            if (getActivity() != null) {
+                getActivity().finish();
+            }
+            return true;
+        }
+        return false;
+    }
 
 }

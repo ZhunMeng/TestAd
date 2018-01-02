@@ -1,12 +1,14 @@
-package com.duodian.admore.main.admore.spreadplancreate;
+package com.duodian.admore.plan.create;
 
+import android.content.DialogInterface;
 import android.support.design.widget.BottomSheetDialog;
 import android.os.Bundle;
+import android.support.v4.widget.ImageViewCompat;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,22 +19,25 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.duodian.admore.R;
 import com.duodian.admore.bean.HttpResult;
+
 import com.duodian.admore.config.Global;
 import com.duodian.admore.http.IServiceApi;
 import com.duodian.admore.http.RetrofitUtil;
-import com.duodian.admore.login.UserInfo;
 import com.duodian.admore.main.BaseActivity;
+import com.duodian.admore.utils.GlideRoundTransform;
+import com.duodian.admore.utils.LogUtil;
+import com.duodian.admore.utils.ToastUtil;
 import com.duodian.admore.utils.Util;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -45,7 +50,11 @@ import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 
+import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
+
 public class SpreadPlanCreateActivity extends BaseActivity implements View.OnClickListener, KeywordDialogFragment.KeywordListener {
+
+    private static final String TAG = "SpreadPlanCreateActivity";
 
     @BindView(R.id.toolbar)
     Toolbar toolbar;
@@ -61,6 +70,12 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
 
     @BindView(R.id.textView_hint)
     TextView textView_hint;
+
+    @BindView(R.id.textView_spreadExplain)
+    TextView textView_spreadExplain;
+
+    @BindView(R.id.imageView_explain)
+    ImageView imageView_explain;
 
     @BindView(R.id.linear_selected)
     LinearLayout linear_selected;
@@ -80,7 +95,9 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
     @BindView(R.id.recyclerView_keywords)
     RecyclerView recyclerView_keywords;
 
-    private AppListAdapter adapter;
+    private AppListAdapter appListAdapter;
+    private List<AppInfo> appInfoList;
+    private AppInfo selectedAppInfo;
 
     private BottomSheetDialog dialog_apps;
 
@@ -88,7 +105,11 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
 
     private KeywordAdapter keywordAdapter;
     private KeywordDialogFragment keywordDialogFragment;
-    private OnSpreadActivityActionListener onSpreadActivityActionListener;
+    private OnPlanCreateActivityActionListener onPlanCreateActivityActionListener;
+
+    private ResourceData resourceData;
+    private boolean enoughNum;
+    private AlertDialog.Builder dialogBuilder;
 
 
     @Override
@@ -112,7 +133,7 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
                 int id = item.getItemId();
                 switch (id) {
                     case R.id.menu_addKeyword:
-                        initDialogKeyword();
+                        initKeywordDialogFragment();
                         break;
                 }
                 return true;
@@ -133,11 +154,12 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
         recyclerView_keywords.setLayoutManager(new LinearLayoutManager(this));
         keywordAdapter = new KeywordAdapter(keywordParamsList);
         recyclerView_keywords.setAdapter(keywordAdapter);
+        getResourceNum();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_spread_create, menu);
+        getMenuInflater().inflate(R.menu.menu_plan_create, menu);
         return true;
     }
 
@@ -146,66 +168,53 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
         int id = v.getId();
         switch (id) {
             case R.id.button_spreadCreate:
-
+                checkParameter();
                 break;
             case R.id.frame_selectedApp:
                 initDialogApps();
-                getApps();
                 break;
         }
 
     }
 
-    private void initDialogKeyword() {
+    private void initKeywordDialogFragment() {
         if (keywordDialogFragment == null) {
             keywordDialogFragment = new KeywordDialogFragment();
-            onSpreadActivityActionListener = keywordDialogFragment;
+            onPlanCreateActivityActionListener = keywordDialogFragment;
         }
         keywordDialogFragment.show(getSupportFragmentManager(), "");
-        if (onSpreadActivityActionListener != null && keywordParamsList.size() > 0) {
-            onSpreadActivityActionListener.onUpdateKeyword(keywordParamsList.get(keywordParamsList.size() - 1), -1);
+        if (onPlanCreateActivityActionListener != null && keywordParamsList.size() > 0) {
+            onPlanCreateActivityActionListener.onUpdateKeyword(keywordParamsList.get(keywordParamsList.size() - 1), -1);
         }
 
     }
 
 
     private void initDialogApps() {
-        dialog_apps = new BottomSheetDialog(this);
-        View view = getLayoutInflater().inflate(R.layout.dialog_apps_spread_create, null);
-//        ButterKnife.bind(this, view);
-        recyclerView_dialog_app = view.findViewById(R.id.recyclerView_dialog_app);
-        dialog_apps.setContentView(view);
-        dialog_apps.show();
+        if (dialog_apps == null) {
+            dialog_apps = new BottomSheetDialog(this);
+            View view = getLayoutInflater().inflate(R.layout.dialog_apps_spread_create, null);
+            recyclerView_dialog_app = view.findViewById(R.id.recyclerView_dialog_app);
+            dialog_apps.setContentView(view);
 
-        List<AppInfo> appInfos = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            AppInfo appInfo = new AppInfo();
-            appInfo.setTrackName("MIX滤镜大师 - 创意无限的图像编辑与海报定制");
-            appInfo.setPrice(0);
-            appInfo.setSmallIcon("http://is3.mzstatic.com/image/thumb/Purple128/v4/43/56/ea/4356eab8-0b17-909e-180b-d67c40cad4da/source/60x60bb.jpg");
-            appInfos.add(appInfo);
+            appInfoList = new ArrayList<>();
+            recyclerView_dialog_app.setLayoutManager(new LinearLayoutManager(SpreadPlanCreateActivity.this));
+            recyclerView_dialog_app.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+            appListAdapter = new AppListAdapter(appInfoList);
+            recyclerView_dialog_app.setAdapter(appListAdapter);
         }
-        recyclerView_dialog_app.setLayoutManager(new LinearLayoutManager(this));
-        adapter = new AppListAdapter(appInfos);
-        recyclerView_dialog_app.setAdapter(adapter);
+        dialog_apps.show();
+        getApps();
     }
 
+
+    /**
+     * 获取app列表
+     */
     private void getApps() {
         IServiceApi iServiceApi = RetrofitUtil.getServiceApi(getApplicationContext());
         HashMap<String, String> params = Util.getBaseParams(this);
-        String identifier = null;
-        Object object = Util.readObjectFromSharedPreference(getApplicationContext(), Global.USERINFO);
-        if (object != null) {
-            try {
-                UserInfo userInfo = (UserInfo) object;
-                if (!TextUtils.isEmpty(userInfo.getIdentifier())) {
-                    identifier = userInfo.getIdentifier();
-                }
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        params.put("identifier", identifier);
+        params.put("identifier", Global.userInfo.getIdentifier());
         Observable<HttpResult<List<AppInfo>>> observable = iServiceApi.myApps(params, System.currentTimeMillis());
         observable.subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -217,12 +226,14 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
 
                     @Override
                     public void onNext(@NonNull HttpResult<List<AppInfo>> listHttpResult) {
-
+                        appInfoList.clear();
+                        appInfoList.addAll(listHttpResult.getResult());
+                        appListAdapter.notifyDataSetChanged();
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
-                        Log.e("SpreadPlanCreateActivity", e.toString());
+                        LogUtil.e("SpreadPlanCreateActivity", e.toString());
                     }
 
                     @Override
@@ -233,9 +244,153 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
     }
 
 
+    private void checkParameter() {
+        if (selectedAppInfo == null) {
+            ToastUtil.showToast(getApplicationContext(), "请选择推广目标", Toast.LENGTH_LONG);
+            return;
+        }
+
+
+        if (keywordParamsList == null || keywordParamsList.size() <= 0) {
+            ToastUtil.showToast(getApplicationContext(), "请添加关键词", Toast.LENGTH_LONG);
+            return;
+        }
+//        if (!enoughNum) {
+//            ToastUtil.showToast(getApplicationContext(), getResources().getString(R.string.spreadExplainNumNotEnough), Toast.LENGTH_LONG);
+//            return;
+//        }
+
+        if (dialogBuilder == null) {
+            dialogBuilder = new AlertDialog.Builder(this);
+            dialogBuilder.setTitle(getResources().getString(R.string.spreadHint));
+        }
+        float price = selectedAppInfo.getPrice();
+        int num = 0;
+        int balance = 0;
+        for (int i = 0; i < keywordParamsList.size(); i++) {
+            num += keywordParamsList.get(i).getNumber();
+        }
+        StringBuilder stringBuilder = new StringBuilder();
+        String priceString;
+        if (price > 0) {
+            priceString = "付费";
+            balance = resourceData.getPayBalanceNum();
+        } else {
+            priceString = "免费";
+            balance = resourceData.getFreeBalanceNum();
+        }
+        stringBuilder.append(priceString).append("\n应用共投放 ").append(num).append(" 次\n")
+                .append("剩余").append(priceString).append("资源包 ").append(balance).append(" 次");
+        dialogBuilder.setMessage(stringBuilder.toString());
+        dialogBuilder.setPositiveButton(R.string.makeSure, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                savePlan();
+            }
+        }).setNegativeButton(R.string.backToChange, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        }).show();
+    }
+
+
+    private void savePlan() {
+        IServiceApi iServiceApi = RetrofitUtil.getServiceApi(getApplicationContext());
+        HashMap<String, String> params = Util.getBaseParams(this);
+        params.put("identifier", Global.userInfo.getIdentifier());
+        if (selectedAppInfo == null) {
+            ToastUtil.showToast(getApplicationContext(), "请选择推广目标", Toast.LENGTH_LONG);
+            return;
+        }
+        params.put("userAppId", selectedAppInfo.getUserAppId());
+
+        if (keywordParamsList == null || keywordParamsList.size() <= 0) {
+            ToastUtil.showToast(getApplicationContext(), "请添加关键词", Toast.LENGTH_LONG);
+            return;
+        }
+//        if (!enoughNum) {
+//            ToastUtil.showToast(getApplicationContext(), getResources().getString(R.string.spreadExplainNumNotEnough), Toast.LENGTH_LONG);
+//            return;
+//        }
+        params.put("keywordParams", new Gson().toJson(keywordParamsList));
+        LogUtil.e(TAG, new Gson().toJson(keywordParamsList));
+        Observable<HttpResult> observable = iServiceApi.savePlan(params, System.currentTimeMillis());
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HttpResult>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        showLoadingDialog();
+                        LogUtil.e(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(HttpResult httpResult) {
+                        dismissLoadingDialog();
+                        if (httpResult != null && httpResult.isSuccess() && "200".equalsIgnoreCase(httpResult.getCode())) {
+                            ToastUtil.showToast(getApplicationContext(), "创建推广成功", Toast.LENGTH_LONG);
+                        } else if (httpResult != null && httpResult.getMessage() != null) {
+                            ToastUtil.showToast(getApplicationContext(), httpResult.getMessage(), Toast.LENGTH_LONG);
+                        }
+                        LogUtil.e(TAG, "onNext");
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        dismissLoadingDialog();
+                        ToastUtil.showToast(getApplicationContext(), "未知错误,请重试", Toast.LENGTH_LONG);
+                        LogUtil.e(TAG, "onError");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        LogUtil.e(TAG, "onComplete");
+                        dismissLoadingDialog();
+                    }
+                });
+    }
+
+
+    private void getResourceNum() {
+        IServiceApi iServiceApi = RetrofitUtil.getServiceApi(getApplicationContext());
+        HashMap<String, String> params = Util.getBaseParams(this);
+        params.put("identifier", Global.userInfo.getIdentifier());
+        Observable<HttpResult<ResourceData>> observable = iServiceApi.loadResourceData(params, System.currentTimeMillis());
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HttpResult<ResourceData>>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+                        LogUtil.e(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(HttpResult<ResourceData> resourceDataHttpResult) {
+                        if (resourceDataHttpResult.getResult() != null) {
+                            resourceData = resourceDataHttpResult.getResult();
+                            LogUtil.e(TAG, resourceData.getPayBalanceNum() + "");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        LogUtil.e(TAG, "onError");
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        LogUtil.e(TAG, "onComplete");
+                    }
+                });
+
+
+    }
+
+
     @Override
     public void onKeywordSetup(KeywordParams keywordParams, int position) {
-
         Calendar calendarStart = Calendar.getInstance();
         calendarStart.setTimeInMillis(keywordParams.getStartDateTime());
         int yearStart = calendarStart.get(Calendar.YEAR);
@@ -290,8 +445,10 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
             keywordParams.setSpreadTime(stringBuilder.toString());
 
         } else {
-            int hourEnd = (int) (keywordParams.getEndDateTime() / 1000 / 60 / 60);
-            int minuteEnd = (int) (keywordParams.getEndDateTime() / 1000 / 60 % 60);
+            Calendar calendarEnd = Calendar.getInstance();
+            calendarEnd.setTimeInMillis(keywordParams.getEndDateTime());
+            int hourEnd = calendarEnd.get(Calendar.HOUR_OF_DAY);
+            int minuteEnd = calendarEnd.get(Calendar.MINUTE);
 
             StringBuilder stringBuilder = new StringBuilder("推广时间: ");
             stringBuilder.append(yearStart).append("-");
@@ -334,6 +491,22 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
             keywordParamsList.get(position).setNumber(keywordParams.getNumber());
             keywordAdapter.notifyItemChanged(position);
         }
+        int num = 0;
+        for (int i = 0; i < keywordParamsList.size(); i++) {
+            num += keywordParamsList.get(i).getNumber();
+        }
+        if (resourceData != null && resourceData.getPayBalanceNum() < num) {
+            enoughNum = false;
+            textView_spreadExplain.setText(getResources().getString(R.string.spreadExplainNumNotEnough));
+            textView_spreadExplain.setTextColor(getResources().getColor(R.color.red));
+            ImageViewCompat.setImageTintList(imageView_explain, getResources().getColorStateList(R.color.red));
+        } else {
+            enoughNum = true;
+            textView_spreadExplain.setTextColor(getResources().getColor(R.color.grayText));
+            textView_spreadExplain.setText(getResources().getString(R.string.spreadExplain));
+            ImageViewCompat.setImageTintList(imageView_explain, getResources().getColorStateList(R.color.grayText));
+        }
+
     }
 
 
@@ -346,7 +519,7 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
 
         @Override
         public KeywordAdapter.KeywordViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_spread_create_keyword, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.itemview_plan_create_keyword, parent, false);
             return new KeywordViewHolder(view);
         }
 
@@ -403,9 +576,9 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
                     public void onClick(View v) {
                         int position = getAdapterPosition();
                         if (position >= 0 && keywordParamsList.size() - 1 >= position) {
-                            if (onSpreadActivityActionListener != null) {
+                            if (onPlanCreateActivityActionListener != null) {
                                 keywordDialogFragment.show(getSupportFragmentManager(), "");
-                                onSpreadActivityActionListener.onUpdateKeyword(keywordParamsList.get(position), position);
+                                onPlanCreateActivityActionListener.onUpdateKeyword(keywordParamsList.get(position), position);
                             }
                         }
                     }
@@ -415,7 +588,11 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
     }
 
 
-    class AppListAdapter extends RecyclerView.Adapter<AppListAdapter.AppListViewHolder> {
+    class AppListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+        private static final int TYPE_ITEM = 0;
+        private static final int TYPE_FOOTER = 1;
+
         private List<AppInfo> appInfos;
 
         AppListAdapter(List<AppInfo> appInfos) {
@@ -423,31 +600,49 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
         }
 
         @Override
-        public AppListViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            return new AppListViewHolder(LayoutInflater.from(SpreadPlanCreateActivity.this).inflate(R.layout.itemview_spread_create_apps, parent, false));
+        public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            if (viewType == TYPE_FOOTER) {
+                View footerView = LayoutInflater
+                        .from(SpreadPlanCreateActivity.this).inflate(R.layout.itemview_app_list_footer, parent, false);
+                return new AppListFooterViewHolder(footerView);
+            }
+            return new AppListViewHolder(LayoutInflater
+                    .from(SpreadPlanCreateActivity.this).inflate(R.layout.itemview_plan_create_apps, parent, false));
         }
 
         @Override
-        public void onBindViewHolder(AppListViewHolder holder, int position) {
-            Glide.with(getApplicationContext())
-                    .load(appInfos.get(position).getSmallIcon())
-                    .apply(new RequestOptions().transforms(new RoundedCorners(24)))
-                    .into(holder.imageView_icon);
-            holder.appName.setText(appInfos.get(position).getTrackName());
-            if (appInfos.get(position).getPrice() > 0) {
-                holder.appPrice.setText(String.valueOf(appInfos.get(position).getPrice()));
-            } else {
-                holder.appPrice.setText(getResources().getString(R.string.free));
-            }
-            if (position == 2) {
-                holder.appPrice.setText("￥1.0");
+        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+            if (holder instanceof AppListViewHolder) {
+                AppListViewHolder appListViewHolder = (AppListViewHolder) holder;
+                Glide.with(getApplicationContext())
+                        .load(appInfos.get(position).getSmallIcon())
+                        .apply(new RequestOptions().transforms(new GlideRoundTransform(getApplicationContext(), 8)))
+                        .transition(withCrossFade())
+                        .into(appListViewHolder.imageView_icon);
+                appListViewHolder.appName.setText(appInfos.get(position).getTrackName());
+                if (appInfos.get(position).getPrice() > 0) {
+                    appListViewHolder.appPrice.setText(String.valueOf(appInfos.get(position).getPrice()));
+                } else {
+                    appListViewHolder.appPrice.setText(getResources().getString(R.string.free));
+                }
+                if (position == 2) {
+                    appListViewHolder.appPrice.setText("￥1.0");
+                }
             }
         }
 
 
         @Override
         public int getItemCount() {
-            return appInfos.size();
+            return appInfos.size() + 1;
+        }
+
+        @Override
+        public int getItemViewType(int position) {
+            if (position == appInfos.size()) {
+                return TYPE_FOOTER;
+            }
+            return TYPE_ITEM;
         }
 
         class AppListViewHolder extends RecyclerView.ViewHolder {
@@ -480,6 +675,14 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
             }
         }
 
+        class AppListFooterViewHolder extends RecyclerView.ViewHolder {
+
+            AppListFooterViewHolder(View footerView) {
+                super(footerView);
+                ButterKnife.bind(this, footerView);
+            }
+        }
+
     }
 
 
@@ -489,12 +692,18 @@ public class SpreadPlanCreateActivity extends BaseActivity implements View.OnCli
      * @param appInfo
      */
     private void setSelectedAppInfo(AppInfo appInfo) {
+        try {
+            selectedAppInfo = appInfo.clone();  // TODO: 2017/11/13 clone  failure
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
         dialog_apps.hide();
         textView_hint.setVisibility(View.GONE);
         linear_selected.setVisibility(View.VISIBLE);
         Glide.with(this)
                 .load(appInfo.getSmallIcon())
-                .apply(new RequestOptions().transform(new RoundedCorners(24)))
+                .apply(new RequestOptions().transforms(new GlideRoundTransform(getApplicationContext(), 8)))
+                .transition(withCrossFade())
                 .into(imageView_iconSelected);
         textView_appNameSelected.setText(appInfo.getTrackName());
         if (appInfo.getPrice() > 0) {

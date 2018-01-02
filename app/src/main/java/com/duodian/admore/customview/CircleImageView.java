@@ -2,6 +2,7 @@ package com.duodian.admore.customview;
 
 /**
  * Created by duodian on 2017/10/12.
+ * CircleImageView
  */
 
 import android.content.Context;
@@ -98,20 +99,16 @@ public class CircleImageView extends android.support.v7.widget.AppCompatImageVie
             mCircleBackgroundColor = a.getColor(R.styleable.CircleImageView_civ_fill_color,
                     DEFAULT_CIRCLE_BACKGROUND_COLOR);
         }
-
         a.recycle();
-
         init();
     }
 
     private void init() {
         super.setScaleType(SCALE_TYPE);
         mReady = true;
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             setOutlineProvider(new OutlineProvider());
         }
-
         if (mSetupPending) {
             setup();
             mSetupPending = false;

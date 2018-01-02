@@ -11,7 +11,6 @@ import android.os.Bundle;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,52 +24,47 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.SimpleTarget;
 import com.bumptech.glide.request.transition.Transition;
 import com.duodian.admore.R;
+import com.duodian.admore.account.AccountManageActivity;
+import com.duodian.admore.app.AppManagementActivity;
+import com.duodian.admore.auth.AuthActivity;
+import com.duodian.admore.auth.AuthInfo;
+import com.duodian.admore.bean.HttpResult;
+import com.duodian.admore.config.Global;
+import com.duodian.admore.http.IServiceApi;
+import com.duodian.admore.http.RetrofitUtil;
+import com.duodian.admore.invoice.InvoiceManagementActivity;
 import com.duodian.admore.main.BaseFragment;
-import com.duodian.admore.main.usercenter.settings.SettingsActivity;
+import com.duodian.admore.main.home.resourcebalance.ResourceBalanceActivity;
+import com.duodian.admore.notification.NotificationListActivity;
+import com.duodian.admore.order.list.MyOrderListActivity;
+import com.duodian.admore.settings.SettingsActivity;
+import com.duodian.admore.transaction.record.TransactionRecordActivity;
+import com.duodian.admore.utils.LogUtil;
 import com.duodian.admore.utils.Util;
+
+import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link UserCenterFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link UserCenterFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class UserCenterFragment extends BaseFragment implements View.OnClickListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private static final String TAG = "UserCenterFragment";
 
     private OnFragmentInteractionListener mListener;
 
     public UserCenterFragment() {
     }
 
-    public static UserCenterFragment newInstance(String param1, String param2) {
-        UserCenterFragment fragment = new UserCenterFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
     }
 
     @BindView(R.id.frameLayoutEmail)
@@ -106,8 +100,11 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
     @BindView(R.id.linear_phone)
     LinearLayout linear_phone;
 
-    @BindView(R.id.linear_certification)
-    LinearLayout linear_certification;
+    @BindView(R.id.linear_authentication)
+    LinearLayout linear_authentication;
+
+    @BindView(R.id.textView_authStatus)
+    TextView textView_authStatus;
 
     @BindView(R.id.linear_accountManagement)
     LinearLayout linear_accountManagement;
@@ -128,6 +125,7 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
             blurScript = ScriptIntrinsicBlur.create(rs, Element.U8_4(rs));
         }
         initViews();
+
         return view;
     }
 
@@ -136,53 +134,58 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
         FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) frameLayoutEmail.getLayoutParams();
         params.topMargin += height;
         frameLayoutEmail.setLayoutParams(params);
-        frameLayoutEmail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        frameLayoutEmail.setOnClickListener(this);
 
-            }
-        });
-        Glide.with(getActivity())
-                .load(R.drawable.husky)
-                .into(new SimpleTarget<Drawable>() {
-                    @Override
-                    public void onResourceReady(final Drawable resource, Transition<? super Drawable> transition) {
-                        imageViewPortrait.setImageDrawable(resource);
-                        imageViewPortrait.animate().alpha(1.0f).setDuration(500).start();
-                        new Thread() {
-                            @Override
-                            public void run() {
-                                long time = System.currentTimeMillis();
-                                Bitmap bitmapScaled = Util.getScaledBitmap(((BitmapDrawable) resource).getBitmap(), 64, 64);
-                                final Bitmap bitmap = Util.blurBitmap(getActivity(), bitmapScaled, rs, blurScript, 25);
-                                Log.e("time", System.currentTimeMillis() - time + "");
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        imageViewBlur.setImageBitmap(bitmap);
-                                        imageViewBlur.animate().alpha(1.0f).setDuration(500).start();
-                                    }
-                                });
 
-                            }
-                        }.start();
-
-                    }
-                });
-        textView_userName.setText("Goldberg");
-        textView_email.setText("20178462354@qq.com");
+        textView_userName.setText(Global.userInfo.getNickName() + "");
+        textView_email.setText(Global.userInfo.getUserNo() + "");
         linear_myOrder.setOnClickListener(this);
         linear_orderRecord.setOnClickListener(this);
         linear_resourceManagement.setOnClickListener(this);
         linear_invoiceManagement.setOnClickListener(this);
         linear_appManagement.setOnClickListener(this);
         linear_phone.setOnClickListener(this);
-        linear_certification.setOnClickListener(this);
+        linear_authentication.setOnClickListener(this);
         linear_accountManagement.setOnClickListener(this);
         linear_settings.setOnClickListener(this);
+
+        if (Global.userInfo != null)
+            linear_settings.post(new Runnable() {
+                @Override
+                public void run() {
+                    Glide.with(getActivity())
+                            .load(Global.userInfo.getHeadImage())
+                            .into(new SimpleTarget<Drawable>() {
+                                @Override
+                                public void onResourceReady(final Drawable resource, Transition<? super Drawable> transition) {
+                                    imageViewPortrait.setImageDrawable(resource);
+                                    imageViewPortrait.animate().alpha(1.0f).setDuration(500).start();
+                                    new Thread() {
+                                        @Override
+                                        public void run() {
+                                            long time = System.currentTimeMillis();
+                                            Bitmap bitmapScaled = Util.getScaledBitmap(((BitmapDrawable) resource).getBitmap(), 64, 64);
+                                            final Bitmap bitmap = Util.blurBitmap(getActivity(), bitmapScaled, rs, blurScript, 25);
+                                            Log.e("time", System.currentTimeMillis() - time + "");
+                                            getActivity().runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                    imageViewBlur.setImageBitmap(bitmap);
+                                                    imageViewBlur.animate().alpha(1.0f).setDuration(500).start();
+                                                }
+                                            });
+
+                                        }
+                                    }.start();
+
+                                }
+                            });
+
+                }
+            });
+        getAuthInfo();
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -194,9 +197,6 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
         super.onAttach(context);
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
-        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
         }
     }
 
@@ -212,23 +212,34 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
         int id = v.getId();
         switch (id) {
             case R.id.linear_myOrder:
+                intent = new Intent(getActivity(), MyOrderListActivity.class);
                 break;
             case R.id.linear_orderRecord:
+                intent = new Intent(getActivity(), TransactionRecordActivity.class);
                 break;
             case R.id.linear_resourceManagement:
+                intent = new Intent(getActivity(), ResourceBalanceActivity.class);
                 break;
             case R.id.linear_invoiceManagement:
+                intent = new Intent(getActivity(), InvoiceManagementActivity.class);
                 break;
             case R.id.linear_appManagement:
+                intent = new Intent(getActivity(), AppManagementActivity.class);
                 break;
             case R.id.linear_phone:
+                intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + "010-57239005"));
                 break;
-            case R.id.linear_certification:
+            case R.id.linear_authentication:
+                intent = new Intent(getActivity(), AuthActivity.class);
                 break;
             case R.id.linear_accountManagement:
+                intent = new Intent(getActivity(), AccountManageActivity.class);
                 break;
             case R.id.linear_settings:
                 intent = new Intent(getActivity(), SettingsActivity.class);
+                break;
+            case R.id.frameLayoutEmail:
+                intent = new Intent(getActivity(), NotificationListActivity.class);
                 break;
         }
         if (intent != null) {
@@ -236,16 +247,66 @@ public class UserCenterFragment extends BaseFragment implements View.OnClickList
         }
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
+    private void getAuthInfo() {
+        IServiceApi iServiceApi = RetrofitUtil.getServiceApi(getActivity());
+        HashMap<String, String> params = Util.getBaseParams(getActivity());
+        params.put("identifier", Global.userInfo.getIdentifier());
+        Observable<HttpResult<AuthInfo>> observable = iServiceApi.auth(params, System.currentTimeMillis());
+        observable.subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<HttpResult<AuthInfo>>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
+                        LogUtil.e(TAG, "onSubscribe");
+                    }
+
+                    @Override
+                    public void onNext(@NonNull HttpResult<AuthInfo> authInfoHttpResult) {
+                        LogUtil.e(TAG, "onNext");
+                        if (authInfoHttpResult.getResult() != null) {
+                            AuthInfo authInfo = authInfoHttpResult.getResult();
+                            if (authInfo != null) {
+                                setUpAuthInfo(authInfo);
+                            }
+                        }
+
+                    }
+
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        LogUtil.e(TAG, e.toString());
+                    }
+
+                    @Override
+                    public void onComplete() {
+                        LogUtil.e(TAG, "onComplete");
+                    }
+                });
+    }
+
+    private void setUpAuthInfo(final AuthInfo authInfo) {
+        if (getActivity() != null) {
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    if (authInfo.getAuthStatus() == -1) {
+                        textView_authStatus.setTextColor(getResources().getColor(R.color.red));
+                        textView_authStatus.setText("未认证");
+                    } else if (authInfo.getAuthStatus() == 0) {
+                        textView_authStatus.setTextColor(getResources().getColor(R.color.yellow));
+                        textView_authStatus.setText("待审核");
+                    } else if (authInfo.getAuthStatus() == 1) {
+                        textView_authStatus.setTextColor(getResources().getColor(R.color.green));
+                        textView_authStatus.setText("审核通过");
+                    } else if (authInfo.getAuthStatus() == 2) {
+                        textView_authStatus.setTextColor(getResources().getColor(R.color.red));
+                        textView_authStatus.setText("审核拒绝");
+                    }
+                }
+            });
+        }
+    }
+
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

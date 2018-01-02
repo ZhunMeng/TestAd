@@ -1,15 +1,24 @@
 <component name="ProjectDictionaryState">
   <dictionary name="duodian">
     <words>
+      <w>apprank</w>
+      <w>axisdata</w>
+      <w>axisdatalist</w>
+      <w>byid</w>
       <w>cardview</w>
       <w>cdate</w>
+      <w>datas</w>
+      <w>dropbox</w>
       <w>duodian</w>
       <w>grayf</w>
       <w>imei</w>
       <w>infos</w>
       <w>myapps</w>
+      <w>noti</w>
       <w>resourcevoucher</w>
       <w>usercenter</w>
+      <w>verifycode</w>
+      <w>wechat</w>
     </words>
   </dictionary>
 </component>

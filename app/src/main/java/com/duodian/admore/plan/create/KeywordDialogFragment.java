@@ -1,4 +1,4 @@
-package com.duodian.admore.main.admore.spreadplancreate;
+package com.duodian.admore.plan.create;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
@@ -40,13 +40,13 @@ import butterknife.ButterKnife;
  * 添加keyword fragment
  */
 
-public class KeywordDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener, OnSpreadActivityActionListener {
+public class KeywordDialogFragment extends BottomSheetDialogFragment implements View.OnClickListener, OnPlanCreateActivityActionListener {
 
+    private static final String TAG = "KeywordDialogFragment";
     private KeywordListener keywordListener;
     private BottomSheetDialog bottomSheetDialog;
     private BottomSheetBehavior bottomSheetBehavior;
     private View rootView;
-    private static final String TAG = "KeywordDialogFragment";
     private int position = -1;
     private KeywordParams keywordParams;
 
@@ -129,7 +129,7 @@ public class KeywordDialogFragment extends BottomSheetDialogFragment implements 
 
             @Override
             public void onSlide(@NonNull View bottomSheet, float slideOffset) {
-                if (slideOffset <= -.12) {
+                if (slideOffset <= -.16) {
                     if (bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_DRAGGING
                             || bottomSheetBehavior.getState() == BottomSheetBehavior.STATE_SETTLING) {
                         dismiss();
@@ -175,52 +175,31 @@ public class KeywordDialogFragment extends BottomSheetDialogFragment implements 
             long time = hourOfDay * 60 * 60 * 1000 + minute * 60 * 1000;
             textView_startDateTime.setTag(time);
             textView_startDate.setTag(keywordParams.getStartDateTime() - time);
+
+            Calendar calendarEnd = Calendar.getInstance(Locale.CHINA);
+            calendarEnd.setTimeInMillis(keywordParams.getEndDateTime());
+            int yearEnd = calendarEnd.get(Calendar.YEAR);
+            int monthEnd = calendarEnd.get(Calendar.MONTH);
+            int dayOfMonthEnd = calendarEnd.get(Calendar.DAY_OF_MONTH);
+            int hourOfDayEnd = calendarEnd.get(Calendar.HOUR_OF_DAY);
+            int minuteEnd = calendarEnd.get(Calendar.MINUTE);
+            long timeEnd = hourOfDayEnd * 60 * 60 * 1000 + minuteEnd * 60 * 1000;
+
             if (keywordParams.isLongTerm()) {
-                Calendar calendarEnd = Calendar.getInstance(Locale.CHINA);
-                calendarEnd.setTimeInMillis(keywordParams.getEndDateTime());
-                int yearEnd = calendarEnd.get(Calendar.YEAR);
-                int monthEnd = calendarEnd.get(Calendar.MONTH);
-                int dayOfMonthEnd = calendarEnd.get(Calendar.DAY_OF_MONTH);
-                int hourOfDayEnd = calendarEnd.get(Calendar.HOUR_OF_DAY);
-                int minuteEnd = calendarEnd.get(Calendar.MINUTE);
                 textView_endDate.setText(yearEnd + "-" + (monthEnd + 1) + "-" + dayOfMonthEnd);
-                textView_endDateTime.setText(hourOfDayEnd + ":" + minuteEnd);
-                long timeEnd = hourOfDayEnd * 60 * 60 * 1000 + minuteEnd * 60 * 1000;
-                textView_endDateTime.setTag(timeEnd);
                 textView_endDate.setTag(keywordParams.getEndDateTime() - timeEnd);
-            } else {
-                int hourEnd = (int) (keywordParams.getEndDateTime() / 1000 / 60 / 60);
-                int minuteEnd = (int) (keywordParams.getEndDateTime() / 1000 / 60 % 60);
-                StringBuilder stringBuilder = new StringBuilder();
-                if (hourEnd < 10) {
-                    stringBuilder.append("0");
-                }
-                stringBuilder.append(hourEnd).append(":");
-                if (minuteEnd < 10) {
-                    stringBuilder.append("0");
-                }
-                stringBuilder.append(minuteEnd);
-                textView_endDateTime.setText(stringBuilder.toString());
-                textView_endDateTime.setTag(keywordParams.getEndDateTime());
             }
-//            } else {//添加新的keyword 从当前时间的后15分钟开始至当天23点59分
-//                Calendar calendar = Calendar.getInstance(Locale.CHINA);
-//                if (keywordParams != null) {
-//                    calendar.setTimeInMillis(keywordParams.getStartDateTime());
-//                }
-//                int year = calendar.get(Calendar.YEAR);
-//                int month = calendar.get(Calendar.MONTH);
-//                int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-//                int hourOfDay = calendar.get(Calendar.HOUR_OF_DAY);
-//                int minute = calendar.get(Calendar.MINUTE);
-//                textView_startDate.setText(year + "-" + (month + 1) + "-" + dayOfMonth);
-//                textView_startDateTime.setText(hourOfDay + ":" + minute);
-//                long time = hourOfDay * 60 * 60 * 1000 + minute * 60 * 1000;
-//                textView_startDateTime.setTag(time);
-//                textView_startDate.setTag(keywordParams.getStartDateTime() - time);
-//
-//                textView_endDateTime.setText(23 + ":" + 59);
-//            }
+            StringBuilder stringBuilder = new StringBuilder();
+            if (hourOfDayEnd < 10) {
+                stringBuilder.append("0");
+            }
+            stringBuilder.append(hourOfDayEnd).append(":");
+            if (minuteEnd < 10) {
+                stringBuilder.append("0");
+            }
+            stringBuilder.append(minuteEnd);
+            textView_endDateTime.setText(stringBuilder.toString());
+            textView_endDateTime.setTag(timeEnd);
         }
         return bottomSheetDialog;
     }
@@ -257,6 +236,10 @@ public class KeywordDialogFragment extends BottomSheetDialogFragment implements 
                     ToastUtil.showToast(getActivity(), getResources().getString(R.string.inputSpreadNum), Toast.LENGTH_LONG);
                     return;
                 }
+                if (Integer.parseInt(editText_limitNum.getText().toString().trim()) <= 0) {
+                    ToastUtil.showToast(getActivity(), "推广次数必须大于0", Toast.LENGTH_LONG);
+                    return;
+                }
                 if (TextUtils.isEmpty(textView_startDate.getText().toString().trim())) {
                     ToastUtil.showToast(getActivity(), getResources().getString(R.string.inputStartDate), Toast.LENGTH_LONG);
                     return;
@@ -278,6 +261,11 @@ public class KeywordDialogFragment extends BottomSheetDialogFragment implements 
                     return;
                 }
 
+                if ((long) textView_endDateTime.getTag() + (long) textView_startDate.getTag() < System.currentTimeMillis()) {
+                    ToastUtil.showToast(getActivity(), getResources().getString(R.string.inputCorrectDateTimeNow), Toast.LENGTH_LONG);
+                    return;
+                }
+
                 if (keywordListener != null) {
                     KeywordParams keywordParams = new KeywordParams();
                     keywordParams.setKeyword(editText_keyword.getText().toString().trim());
@@ -286,7 +274,7 @@ public class KeywordDialogFragment extends BottomSheetDialogFragment implements 
                     if (checkbox_endDate.isChecked()) {
                         keywordParams.setEndDateTime((long) textView_endDate.getTag() + (long) textView_endDateTime.getTag());
                     } else {
-                        keywordParams.setEndDateTime((long) textView_endDateTime.getTag());
+                        keywordParams.setEndDateTime((long) textView_startDate.getTag() + (long) textView_endDateTime.getTag());
                     }
                     keywordParams.setLongTerm(checkbox_endDate.isChecked());
                     keywordListener.onKeywordSetup(keywordParams, position);

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.duodian.admore.main.admore.resourcebalance.ResourceBalanceActivity">
+    tools:context="com.duodian.admore.main.home.resourcebalance.ResourceBalanceActivity">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/resource"
-            android:textSize="@dimen/titleSize" />
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/titleSizeMiddle" />
     </android.support.v7.widget.Toolbar>
 
     <View
@@ -65,7 +66,8 @@
                 android:alpha=".6"
                 android:background="@drawable/shape_round_corner_gray"
                 android:gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -107,7 +109,8 @@
                 android:alpha=".6"
                 android:background="@drawable/shape_round_corner_gray"
                 android:gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 
@@ -135,7 +138,7 @@
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/textView_PlayNum"
+                android:id="@+id/textView_playNum"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="4.0"
@@ -150,7 +153,8 @@
                 android:alpha=".6"
                 android:background="@drawable/shape_round_corner_gray"
                 android:gravity="center"
-                android:textColor="@android:color/white" />
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

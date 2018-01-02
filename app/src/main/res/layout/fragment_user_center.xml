@@ -42,6 +42,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="4dp"
                     android:layout_marginTop="8dp"
+                    android:textColor="@android:color/white"
                     android:textSize="@dimen/titleSize"
                     android:textStyle="bold" />
 
@@ -49,7 +50,8 @@
                     android:id="@+id/email"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/grayText" />
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="@dimen/titleSizeSmall" />
             </LinearLayout>
 
             <FrameLayout
@@ -65,7 +67,7 @@
                     android:layout_height="24dp"
                     android:layout_gravity="center"
                     android:src="@drawable/ic_email_black_24dp"
-                    android:tint="@color/grayText" />
+                    android:tint="@android:color/white" />
             </FrameLayout>
         </FrameLayout>
 
@@ -82,15 +84,17 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@null"
                 android:src="@drawable/ic_description_black_24dp"
-                android:tint="@color/grayIcon" />
+                android:tint="@color/blue" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 android:paddingLeft="@dimen/borderPadding"
+                android:paddingRight="@dimen/borderPadding"
                 android:text="@string/myOrder"
-                android:textSize="@dimen/subheadingSize" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -111,15 +115,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_history_black_24dp"
-                android:tint="@color/grayIcon" />
+                android:tint="@color/blue" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 android:paddingLeft="@dimen/borderPadding"
+                android:paddingRight="@dimen/borderPadding"
                 android:text="@string/orderRecord"
-                android:textSize="@dimen/subheadingSize" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -130,7 +136,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="18dp"
             android:background="@color/unpressedLight" />
 
         <LinearLayout
@@ -145,15 +151,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_account_balance_wallet_black_24dp"
-                android:tint="@color/grayIcon" />
+                android:tint="@color/green" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 android:paddingLeft="@dimen/borderPadding"
+                android:paddingRight="@dimen/borderPadding"
                 android:text="@string/resourceManagement"
-                android:textSize="@dimen/subheadingSize" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -174,15 +182,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_bookmark_black_24dp"
-                android:tint="@color/grayIcon" />
+                android:tint="@color/green" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 android:paddingLeft="@dimen/borderPadding"
+                android:paddingRight="@dimen/borderPadding"
                 android:text="@string/invoiceManagement"
-                android:textSize="@dimen/subheadingSize" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -203,15 +213,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_apps_black_24dp"
-                android:tint="@color/grayIcon" />
+                android:tint="@color/green" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 android:paddingLeft="@dimen/borderPadding"
+                android:paddingRight="@dimen/borderPadding"
                 android:text="@string/appManagement"
-                android:textSize="@dimen/subheadingSize" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -222,7 +234,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="18dp"
             android:background="@color/unpressedLight" />
 
         <LinearLayout
@@ -237,15 +249,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_phone_android_black_24dp"
-                android:tint="@color/grayIcon" />
+                android:tint="@color/yellow" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 android:paddingLeft="@dimen/borderPadding"
+                android:paddingRight="@dimen/borderPadding"
                 android:text="@string/phone"
-                android:textSize="@dimen/subheadingSize" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -255,7 +269,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/linear_certification"
+            android:id="@+id/linear_authentication"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackground"
@@ -266,15 +280,25 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_check_circle_black_24dp"
-                android:tint="@color/grayIcon" />
+                android:tint="@color/yellow" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 android:paddingLeft="@dimen/borderPadding"
+                android:paddingRight="@dimen/borderPadding"
                 android:text="@string/certification"
-                android:textSize="@dimen/subheadingSize" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
+
+            <TextView
+                android:id="@+id/textView_authStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingLeft="@dimen/borderPadding"
+                android:paddingRight="@dimen/borderPadding"
+                android:textSize="@dimen/titleSizeSmall" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -295,15 +319,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_perm_identity_black_24dp"
-                android:tint="@color/grayIcon" />
+                android:tint="@color/yellow" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 android:paddingLeft="@dimen/borderPadding"
+                android:paddingRight="@dimen/borderPadding"
                 android:text="@string/accountManagement"
-                android:textSize="@dimen/subheadingSize" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -314,7 +340,7 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="10dp"
+            android:layout_height="18dp"
             android:background="@color/unpressedLight" />
 
         <LinearLayout
@@ -329,15 +355,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_settings_black_24dp"
-                android:tint="@color/grayIcon" />
+                android:tint="@color/red" />
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1.0"
                 android:paddingLeft="@dimen/borderPadding"
+                android:paddingRight="@dimen/borderPadding"
                 android:text="@string/settings"
-                android:textSize="@dimen/subheadingSize" />
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
 
             <ImageView
                 android:layout_width="wrap_content"
@@ -348,7 +376,8 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="20dp" />
+            android:layout_height="18dp"
+            android:background="@color/unpressedLight" />
 
     </LinearLayout>
 </ScrollView>

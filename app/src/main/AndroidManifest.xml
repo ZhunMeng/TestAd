@@ -6,38 +6,73 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".login.LoginActivity" />
         <activity
             android:name=".splash.SplashActivity"
-            android:theme="@style/SplashTheme" />
-        <activity
-            android:name=".main.MainActivity"
-            android:screenOrientation="portrait">
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.admore.resourceachieve.ResourcePurchaseActivity" />
-        <activity android:name=".main.usercenter.settings.SettingsActivity" />
+        <activity
+            android:name=".main.MainActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait" />
+        <activity android:name=".main.home.resourcepurchase.ResourcePurchaseActivity" />
+        <activity android:name=".settings.SettingsActivity" />
         <activity android:name=".main.BaseActivity" />
-        <activity android:name=".main.admore.resourcebalance.ResourceBalanceActivity" />
-        <activity android:name=".main.admore.spreadplancreate.SpreadPlanCreateActivity" />
-        <activity android:name=".main.admore.resourcevoucher.ResourceVoucherActivity" />
-        <activity android:name=".plan.list.PlanActivity" />
+        <activity android:name=".main.home.resourcebalance.ResourceBalanceActivity" />
+        <activity android:name=".plan.create.SpreadPlanCreateActivity" />
+        <activity android:name=".main.home.resourcevoucher.ResourceVoucherActivity" />
+        <activity android:name=".plan.list.PlanListActivity" />
         <activity android:name=".plan.today.PlanCurrentDayActivity" />
         <activity android:name=".search.SearchActivity" />
-        <activity android:name=".play.PlayPlanCreateActivity" />
-        <activity android:name=".monitor.detail.MonitorDetailActivity"></activity>
+        <activity android:name=".play.create.PlayPlanCreateActivity" />
+        <activity android:name=".monitor.detail.MonitorDetailActivity" />
+        <activity android:name=".play.list.PlayPlanListActivity" />
+        <activity
+            android:name=".invoice.InvoiceManagementActivity"
+            android:windowSoftInputMode="adjustPan|stateHidden" />
+        <activity android:name=".invoice.express.ExpressActivity" />
+        <activity android:name=".invoice.detail.InvoiceDetailActivity" />
+        <activity android:name=".invoice.address.select.SelectAddressActivity" />
+        <activity
+            android:name=".invoice.address.management.AddressManagementActivity"
+            android:launchMode="singleTop" />
+        <activity android:name=".invoice.address.edit.AddressEditActivity" />
+        <activity android:name=".order.list.MyOrderListActivity" />
+        <activity android:name=".order.detail.OrderDetailActivity" />
+        <activity android:name=".transaction.record.TransactionRecordActivity" />
+        <activity android:name=".transaction.record.cash.RecordCashInfoDetailActivity" />
+        <activity android:name=".transaction.record.coupon.RecordCouponInfoDetailActivity" />
+        <activity android:name=".play.today.PlayPlanTodayListActivity" />
+        <activity android:name=".plan.history.PlanHistoryActivity" />
+        <activity android:name=".play.history.PlayPlanHistoryListActivity" />
+        <activity android:name=".notification.NotificationListActivity" />
+        <activity android:name=".notification.detail.NotificationDetailActivity" />
+        <activity android:name=".app.AppManagementActivity" />
+        <activity android:name=".auth.AuthActivity" />
+        <activity android:name=".account.AccountManageActivity" />
+        <activity android:name=".account.verification.VerificationTypeActivity" />
+        <activity android:name=".account.verification.VerificationActivity" />
+        <activity android:name=".monitor.detail.keyword.KeywordPromotionMonitorActivity" />
+        <activity
+            android:name=".monitor.detail.AppPromotionMonitorActivity"
+            android:screenOrientation="landscape" />
+        <meta-data
+            android:name="com.duodian.admore.glide.AdmoreGlideModule"
+            android:value="GlideModule" />
     </application>
 
 </manifest>

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="@dimen/borderPaddingBig"
-    tools:context="com.duodian.admore.main.admore.resourcevoucher.VoucherFragment">
+    tools:context="com.duodian.admore.main.home.resourcevoucher.VoucherFragment">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerView_voucher"

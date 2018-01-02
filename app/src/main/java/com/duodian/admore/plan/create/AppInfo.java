@@ -1,4 +1,4 @@
-package com.duodian.admore.main.admore.spreadplancreate;
+package com.duodian.admore.plan.create;
 
 import java.io.Serializable;
 
@@ -7,7 +7,7 @@ import java.io.Serializable;
  * app信息
  */
 
-public class AppInfo implements Serializable {
+public class AppInfo implements Serializable, Cloneable {
 
     private String userAppId;// "1",  //userAppId
     private String trackId;//1141805804,  //应用的appid
@@ -15,6 +15,8 @@ public class AppInfo implements Serializable {
     private String trackName;//SD敢达强袭战线(正版授权、经典敢达系列3D动作手游), //应用名称
     private String formattedPrice;//¥1.00, //格式化的金额
     private float price;//1, //价格数字
+    private long fileSizeBytes;//271451136 //包大小
+
 
     public String getUserAppId() {
         return userAppId;
@@ -72,6 +74,14 @@ public class AppInfo implements Serializable {
         this.fileSizeBytes = fileSizeBytes;
     }
 
-    private long fileSizeBytes;//271451136 //包大小
-
+    @Override
+    public AppInfo clone() throws CloneNotSupportedException {
+        AppInfo appInfo = null;
+        try {
+            appInfo = (AppInfo) super.clone();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return appInfo;
+    }
 }

@@ -18,6 +18,11 @@ public class UserInfo implements Parcelable, Serializable {
     private String identifier;
     private String backgroundImage;
 
+    public UserInfo() {
+
+    }
+
+
     private UserInfo(Parcel in) {
         userNo = in.readString();
         nickName = in.readString();

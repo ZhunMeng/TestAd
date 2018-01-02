@@ -3,9 +3,7 @@ package com.duodian.admore.http;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.util.Log;
-import android.webkit.WebView;
 
-import com.duodian.admore.config.Config;
 import com.duodian.admore.config.Global;
 import com.duodian.admore.utils.Util;
 
@@ -47,7 +45,7 @@ public class RetrofitUtil {
             @Override
             public Response intercept(@NonNull Chain chain) throws IOException {
                 Request request = chain.request().newBuilder()
-                        .addHeader(Global.APP_VERSION, Config.APP_VERSION)
+                        .addHeader(Global.APP_VERSION, Global.APP_VERSION_NUM)
                         .addHeader(Global.ANDROID_ID, Util.getAndroidId(context))
                         .addHeader(Global.USER_AGENT, System.getProperty("http.agent"))
                         .build();
@@ -55,7 +53,7 @@ public class RetrofitUtil {
             }
         });
 
-        if (Config.DEBUG) {
+        if (Global.DEBUG) {
             HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {//打印log
                 @Override
                 public void log(String message) {
@@ -72,6 +70,7 @@ public class RetrofitUtil {
                 .baseUrl(HttpUrl.DOMAIN)
                 .client(okHttpClient)
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+//                .addConverterFactory(FastJsonConverterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
                 .create(IServiceApi.class);

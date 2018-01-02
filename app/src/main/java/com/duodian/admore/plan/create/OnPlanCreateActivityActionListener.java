@@ -1,4 +1,4 @@
-package com.duodian.admore.main.admore.spreadplancreate;
+package com.duodian.admore.plan.create;
 
 /**
  * Created by duodian on 2017/10/19.
@@ -6,7 +6,7 @@ package com.duodian.admore.main.admore.spreadplancreate;
  */
 
 
-public interface OnSpreadActivityActionListener {
+public interface OnPlanCreateActivityActionListener {
 
     /**
      * 修改keyword

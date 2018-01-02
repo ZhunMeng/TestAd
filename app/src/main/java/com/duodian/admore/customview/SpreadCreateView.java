@@ -66,7 +66,7 @@ public class SpreadCreateView extends View {
         rectF = new RectF(0, 0, w, h);
         centerPoint = new Point((int) (getWidth() - padding * 1.5f),
                 (int) (getHeight() - 1.5f * padding));
-        radius = padding * 2 / 3;
+        radius = padding / 2;
     }
 
     @Override
@@ -76,11 +76,11 @@ public class SpreadCreateView extends View {
         /*
           周边虚线
          */
-        paint.setColor(getResources().getColor(R.color.colorPrimary));
-        paint.setStrokeWidth(1);
-        paint.setPathEffect(dashPathEffect);
-        canvas.drawRoundRect(rectF, 8, 8, paint);
-        paint.setPathEffect(null);
+//        paint.setColor(getResources().getColor(R.color.colorPrimary));
+//        paint.setStrokeWidth(1);
+//        paint.setPathEffect(dashPathEffect);
+//        canvas.drawRoundRect(rectF, 8, 8, paint);
+//        paint.setPathEffect(null);
 
         /*
           加号

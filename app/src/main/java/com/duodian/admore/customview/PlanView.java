@@ -21,7 +21,7 @@ public class PlanView extends View {
 
     private Paint paint;
     private DashPathEffect dashPathEffect;
-    private int padding = 30;
+    private int padding = 25;
     private RectF rectF;
     private RectF rectFPlan;
     private int planColor;
@@ -52,7 +52,7 @@ public class PlanView extends View {
     protected void onSizeChanged(int w, int h, int oldw, int oldh) {
         super.onSizeChanged(w, h, oldw, oldh);
         rectF = new RectF(0, 0, w, h);
-        rectFPlan = new RectF(padding, padding, getWidth() - padding, getHeight() - padding * 2 / 3);
+        rectFPlan = new RectF(padding, padding, getWidth() - padding, getHeight() - padding);
     }
 
 
@@ -64,10 +64,10 @@ public class PlanView extends View {
           周边虚线
          */
         paint.setColor(getResources().getColor(R.color.colorPrimary));
-        paint.setStrokeWidth(1);
-        paint.setPathEffect(dashPathEffect);
-        canvas.drawRoundRect(rectF, 8, 8, paint);
-        paint.setPathEffect(null);
+//        paint.setStrokeWidth(1);
+//        paint.setPathEffect(dashPathEffect);
+//        canvas.drawRoundRect(rectF, 8, 8, paint);
+//        paint.setPathEffect(null);
 
          /*
           边框
@@ -84,11 +84,11 @@ public class PlanView extends View {
         canvas.drawLine(getWidth() / 3 - padding / 6, getHeight() / 2 - padding / 2, getWidth() / 3 + padding / 6, getHeight() / 2 - padding / 2, paint);
         canvas.drawLine(getWidth() / 3 + padding, getHeight() / 2 - padding / 2, getWidth() * 2 / 3 + padding / 6, getHeight() / 2 - padding / 2, paint);
 
-        canvas.drawLine(getWidth() / 3 - padding / 6, getHeight() / 2 + padding / 2, getWidth() / 3 + padding / 6, getHeight() / 2 + padding / 2, paint);
-        canvas.drawLine(getWidth() / 3 + padding, getHeight() / 2 + padding / 2, getWidth() * 2 / 3 + padding / 6, getHeight() / 2 + padding / 2, paint);
+        canvas.drawLine(getWidth() / 3 - padding / 6, getHeight() / 2 + padding / 3, getWidth() / 3 + padding / 6, getHeight() / 2 + padding / 3, paint);
+        canvas.drawLine(getWidth() / 3 + padding, getHeight() / 2 + padding / 3, getWidth() * 2 / 3 + padding / 6, getHeight() / 2 + padding / 3, paint);
 
         paint.setColor(planColor);
-        canvas.drawLine(getWidth() / 3 - padding / 6, getHeight() / 2 + padding * 3 / 2, getWidth() / 3 + padding / 6, getHeight() / 2 + padding * 3 / 2, paint);
-        canvas.drawLine(getWidth() / 3 + padding, getHeight() / 2 + padding * 3 / 2, getWidth() * 2 / 3 + padding / 6, getHeight() / 2 + padding * 3 / 2, paint);
+        canvas.drawLine(getWidth() / 3 - padding / 6, getHeight() / 2 + padding * 7 / 6, getWidth() / 3 + padding / 6, getHeight() / 2 + padding * 7 / 6, paint);
+        canvas.drawLine(getWidth() / 3 + padding, getHeight() / 2 + padding * 7 / 6, getWidth() * 2 / 3 + padding / 6, getHeight() / 2 + padding * 7 / 6, paint);
     }
 }

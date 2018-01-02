@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Admore</string>
+    <string name="rmb">￥ </string>
     <string name="admore">多点广告</string>
     <string name="monitor">效果监测</string>
     <string name="userCenter">用户中心</string>
@@ -11,6 +12,7 @@
     <string name="resourcePlay">PLAY资源包</string>
     <string name="creditNum">信用额度</string>
     <string name="resourceVoucher">资源包兑换卷</string>
+    <string name="couponBalance">代金券余额</string>
     <string name="resourcePurchase">资源包购买</string>
     <string name="adSpread">试客推广</string>
     <string name="spreadPlan">推广计划</string>
@@ -18,6 +20,7 @@
     <string name="spreadHistory">推广历史</string>
     <string name="spreadPlay">Play推广</string>
     <string name="spreadCreate">创建推广</string>
+    <string name="planCreate">创建计划</string>
     <string name="spreadPlayPlan">Play计划</string>
     <string name="spreadPlanCurrentDay">当日执行</string>
     <string name="myOrder">我的订单</string>
@@ -34,6 +37,7 @@
     <string name="aboutUs">关于我们</string>
     <string name="encourage">鼓励</string>
     <string name="exit">退出账号</string>
+    <string name="end">end</string>
 
     <string name="searchHint">请输入搜索内容</string>
     <string name="search">搜索</string>
@@ -42,9 +46,15 @@
     <string name="selectTarget">点击选择推广目标</string><!---->
     <string name="selectTarget1">选择您要推广的目标</string>
     <string name="spreadExplain">请核对您的推广目标状态，如状态不符合将要发生变化请勿下单！以免造成损失</string>
+    <string name="spreadExplainNumNotEnough">资源包数量不足</string>
     <string name="free">免费</string>
     <string name="addKeyword">添加关键词</string>
+    <string name="updateKeyword">修改关键词</string>
+    <string name="addContentParam">添加计划</string>
+    <string name="updateContentParam">修改计划</string>
     <string name="keyword">关键词</string>
+    <string name="contentParam">广告语</string>
+    <string name="inputContentParam">请输入广告语</string>
     <string name="limit">限量</string>
     <string name="inputKeyword">请输入关键词</string>
     <string name="inputSpreadNum">请输入推广次数</string>
@@ -53,20 +63,25 @@
     <string name="inputStartDateTime">请选择起始时间</string>
     <string name="inputEndDateTime">请选择结束时间</string>
     <string name="inputCorrectDateTime">结束时间必须晚于起始时间</string>
+    <string name="inputCorrectDateTimeNow">结束时间必须晚于当前时间</string>
     <string name="num">/次</string>
-    <string name="spreadTime">推广时间</string>
+    <string name="spreadDateTime">推广时间</string>
     <string name="spreadLongTerm">长期推广</string>
     <string name="longTerm">长期</string>
     <string name="addComplete">完成添加</string>
+    <string name="updateComplete">完成修改</string>
     <string name="update">修改</string>
     <string name="delete">删除</string>
     <string name="unit_num">次/下载</string>
     <string name="clickToExchange">点击兑换免费应用资源包</string>
     <string name="hint">提示</string>
+    <string name="spreadHint">投放提示</string>
     <string name="confirmPause">确定暂停计划?</string>
     <string name="confirmStart">确定启用计划?</string>
     <string name="confirm">确定</string>
     <string name="cancel">取消</string>
+    <string name="makeSure">确定无误</string>
+    <string name="backToChange">返回修改</string>
     <string name="spreadNow">正在投放</string>
     <string name="spreadPause">暂停投放</string>
     <string name="spreadStop">投放结束</string>
@@ -85,11 +100,143 @@
 
     <!--monitor-->
     <string name="spreadPlanDetail">试客推广详情</string>
+    <string name="keywordPromotionDetail">关键词推广详情</string>
+    <string name="keywordRank">关键词排名</string>
+    <string name="heat">热度</string>
 
+    <!--login-->
+    <string name="inputUsername">请填写用户名</string>
+    <string name="inputPassword">请填写密码</string>
 
     <string name="footerBehavior">com.duodian.admore.plan.today.FooterBehavior</string>
 
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">登录</string>
+    <string name="register">注册</string>
+    <string name="forgetPassword">忘记密码</string>
+
+    <!--play-->
+    <string name="playPlan">Play 计划</string>
+    <string name="playPlanHistory">Play 推广历史</string>
+
+    <string name="playPlanCreate">创建PLAY计划</string>
+
+    <!--settings-->
+    <string name="confirmLogout">确定要退出账号吗?</string>
+
+    <!--invoice-->
+    <string name="invoiceRequest">发票索取</string>
+    <string name="invoiceTitle">发票抬头: </string>
+    <string name="invoiceTitleType">开具类型: </string>
+    <string name="invoiceType">发票类型: </string>
+    <string name="invoiceTotal">当前可开票金额: </string>
+    <string name="invoiceCreateAmount">本次开票金额: </string>
+    <string name="invoiceCreateAmountHint">填入本次开票金额</string>
+    <string name="invoiceHint">温馨提示:\n\n1.您可以针对已消费金额及当前账户余额开票.\n\n2.若当前账户余额已开票,则不能进行提现,提现需首先作废发票.</string>
+    <string name="cancellation">申请作废</string>
+    <string name="logistics">查看物流</string>
+    <string name="inputCancellationReason">请填写作废原因</string>
+    <string name="statusDesc">物流状态:</string>
+    <string name="sourceDesc">承运来源:</string>
+    <string name="expressNo">运单编号:</string>
+    <string name="code">订单号</string>
+    <string name="money">金额</string>
+    <string name="typeDesc">类型</string>
+    <string name="cdate">创建日期</string>
+    <string name="invoiceDetail">发票详情</string>
+    <string name="selectAddress">选择收货地址</string>
+    <string name="addressManagement">收货地址管理</string>
+    <string name="management">管理</string>
+    <string name="edit">编辑</string>
+    <string name="setDefault">设为默认</string>
+    <string name="confirmDelete">确定删除此地址吗?</string>
+    <string name="addAddress">添加新地址</string>
+    <string name="editAddress">编辑地址</string>
+    <string name="nickName">昵称</string>
+    <string name="contactPhone">联系电话</string>
+    <string name="address">所在地区</string>
+    <string name="provinceCity">省 市</string>
+    <string name="street">街道</string>
+    <string name="streetHint">请填写详细地址,不少于5个字</string>
+    <string name="pleaseSelect">请选择</string>
+    <string name="save">保存</string>
+
+    <!--order-->
+    <string name="myOrders">我的订单</string>
+    <string name="payment">付款</string>
+    <string name="orderDetail">订单详情</string>
+    <string name="cdateTime">创建时间: </string>
+    <string name="cdateTime_">创建时间</string>
+    <string name="product">产品名称</string>
+    <string name="productCode">订单编号</string>
+    <string name="totalStr">支付金额</string>
+    <string name="orderTypeDesc">订单类型</string>
+    <string name="productClsDesc">产品</string>
+    <string name="productSubClsDesc">产品细类</string>
+    <string name="payDate">支付时间</string>
+    <!--transaction record-->
+    <string name="transactionRecord">交易记录</string>
+    <string name="recordDetail">交易详情</string>
+    <string name="flowNo">流水号</string>
+    <string name="remark">备注</string>
+    <string name="date">日期</string>
+
+    <!--消息中心-->
+    <string name="notificationCenter">消息中心</string>
+    <string name="notificationDetail">消息详情</string>
+    <string name="markRead">标记已读</string>
+    <string name="all">全选</string>
+
+    <!--auth-->
+    <string name="auth">认证</string>
+
+    <!--accountManagement-->
+    <string name="loginPassword">登录密码</string>
+    <string name="securityQuestion">密保问题</string>
+    <string name="phoneBind">手机绑定</string>
+    <string name="WXBind">微信绑定</string>
+
+    <!--verification type-->
+    <string name="verificationType">验证选择</string>
+    <string name="verification_email">通过邮箱验证码</string>
+    <string name="verification_phone">通过手机验证码</string>
+    <string name="verification_weChat">通过微信验证码</string>
+    <string name="verification_question">通过密保问题</string>
+    <string name="verification_email_hint">如果你的邮箱还在使用，请选择此方式</string>
+    <string name="verification_phone_hint">如果你的手机还在正常使用，请选择此方式</string>
+    <string name="verification_weChat_hint">如果你的微信绑定多点广告并且正常使用，请选择此方式</string>
+    <string name="verification_question_hint">如果你记得预留的密码保护问题，请选择此方式</string>
+
+    <!--verification-->
+    <string name="verification">验证身份</string>
+    <string name="inputPhone">输入您的手机号码</string>
+    <string name="clickToGet">点击免费获取</string>
+    <string name="mobile">手机号码</string>
+    <string name="next">下一步</string>
+    <string name="email">邮箱</string>
+    <string name="inputEmail">输入您的邮箱</string>
+    <string name="inputVerifyCode">输入验证码</string>
+    <string name="inputWeChat">输入您的微信号</string>
+    <string name="weChat">微信号</string>
+    <string name="confirmPassword">请再次填写密码</string>
+    <string name="operateSuccess">操作成功</string>
+    <string name="realNameAuthentication">实名认证</string>
+    <string name="person">个人</string>
+    <string name="enterprise">企业</string>
+    <string name="realName">真实姓名</string>
+    <string name="inputRealName">请填入您的真实姓名</string>
+    <string name="idCardNo">身份证号</string>
+    <string name="inputIdCardNo">请填入您的身份证号</string>
+    <string name="clickToSelectIdCardImage">点击上传身份证图片</string>
+    <string name="clickToSelectBusinessImage">点击上传营业执照图片</string>
+    <string name="organizationCode">组织机构代码</string>
+    <string name="inputOrganizationCode">请填入组织机构代码</string>
+    <string name="businessCode">营业执照代码</string>
+    <string name="inputBusinessCode">请填入营业执照代码</string>
+    <!--keyword promotion monitor-->
+    <string name="swap">切换视图</string>
+
+
 </resources>

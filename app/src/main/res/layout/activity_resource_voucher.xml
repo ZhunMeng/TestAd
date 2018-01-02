@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:orientation="vertical"
-    tools:context="com.duodian.admore.main.admore.resourcevoucher.ResourceVoucherActivity">
+    tools:context="com.duodian.admore.main.home.resourcevoucher.ResourceVoucherActivity">
 
 
     <include layout="@layout/layout_toolbar" />

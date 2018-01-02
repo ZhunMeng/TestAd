@@ -1,378 +1,460 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipeRefreshLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context="com.duodian.admore.main.admore.AdmoreFragment">
+    android:layout_height="match_parent">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:layout_height="match_parent"
         android:orientation="vertical"
-        android:paddingLeft="18dp"
-        android:paddingRight="18dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="56dp"
-            android:text="@string/balance"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/titleSize" />
-
-        <TextView
-            android:id="@+id/balance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/balance"
-            android:textColor="@android:color/white"
-            android:textSize="@dimen/bigSize" />
-
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
-            android:background="@color/unpressedAlpha6" />
+        tools:context="com.duodian.admore.main.home.HomeIndexFragment">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
+            android:background="@color/colorPrimary"
+            android:orientation="vertical"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/borderPaddingBig"
+                android:layout_marginRight="@dimen/borderPaddingBig"
+                android:layout_marginTop="50dp"
+                android:text="@string/balance"
+                android:textColor="@android:color/white"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal"
+                android:paddingLeft="18dp"
+                android:paddingRight="18dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rmb"
+                    android:textColor="@color/unpressed"
+                    android:textSize="28sp" />
+
+                <TextView
+                    android:id="@+id/textView_advertiserBalance"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingLeft="@dimen/borderPaddingSmall"
+
+                    android:paddingRight="@dimen/borderPaddingSmall"
+                    android:textColor="@android:color/white"
+                    android:textSize="28sp" />
+
+            </LinearLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:layout_marginBottom="12dp"
+                android:layout_marginTop="12dp"
+                android:background="@color/unpressedAlpha6" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:baselineAligned="false"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/linear_resourceBalance"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/shape_round_corner_translucent_gray"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/borderPaddingBig"
+                    android:paddingTop="@dimen/borderPaddingBig">
+
+                    <TextView
+                        android:id="@+id/textView_resourceNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/resourceBalance"
+                        android:textColor="@color/unpressed"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_creditNum"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/shape_round_corner_translucent_gray"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/borderPaddingBig"
+                    android:paddingTop="@dimen/borderPaddingBig">
+
+                    <TextView
+                        android:id="@+id/textView_creditNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/creditNum"
+                        android:textColor="@color/unpressed"
+                        android:textSize="12sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_voucherNum"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:background="@drawable/shape_round_corner_translucent_gray"
+                    android:orientation="vertical"
+                    android:paddingBottom="@dimen/borderPaddingBig"
+                    android:paddingTop="@dimen/borderPaddingBig">
+
+
+                    <TextView
+                        android:id="@+id/textView_couponBalance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:textColor="@android:color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:gravity="center"
+                        android:text="@string/couponBalance"
+                        android:textColor="@color/unpressed"
+                        android:textSize="12sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linear_resourcePurchase"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/dark"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@null"
+                    android:src="@drawable/ic_add_white_24dp"
+                    android:tint="@android:color/white" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingLeft="8dp"
+                    android:paddingRight="8dp"
+                    android:text="@string/resourcePurchase"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp" />
+
+            </LinearLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/unpressedLight"
+            android:gravity="center_vertical"
+            android:paddingBottom="6dp"
+            android:paddingLeft="@dimen/borderPaddingBig"
+            android:paddingRight="@dimen/borderPaddingBig"
+            android:paddingTop="6dp"
+            android:text="@string/adSpread"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/titleSizeSmall"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/borderPaddingSmall"
+            android:layout_marginLeft="@dimen/borderPaddingBig"
+            android:layout_marginRight="@dimen/borderPaddingBig"
+            android:layout_marginTop="@dimen/borderPaddingSmall"
             android:baselineAligned="false"
             android:orientation="horizontal">
 
             <LinearLayout
-                android:id="@+id/linear_resourceBalance"
+                android:id="@+id/linearLayout_spreadCreate"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/borderPaddingSmall"
                 android:layout_weight="1.0"
-                android:background="?selectableItemBackground"
+                android:background="@drawable/shape_round_corner_translucent_white"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/borderPaddingBig"
-                android:paddingTop="@dimen/borderPaddingBig">
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
 
-                <TextView
-                    android:id="@+id/resourceNum"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@android:color/white" />
+                <com.duodian.admore.customview.SpreadCreateView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="@string/resourceBalance"
-                    android:textColor="@color/unpressed" />
+                    android:text="@string/spreadCreate"
+                    android:textColor="@color/unpressed"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_creditNum"
+                android:id="@+id/linearLayout_spreadPlan"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/borderPaddingSmall"
                 android:layout_weight="1.0"
-                android:background="?selectableItemBackground"
+                android:background="@drawable/shape_round_corner_translucent_white"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/borderPaddingBig"
-                android:paddingTop="@dimen/borderPaddingBig">
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
 
-                <TextView
-                    android:id="@+id/creditNum"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@android:color/white" />
+                <com.duodian.admore.customview.PlanView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="@string/creditNum"
-                    android:textColor="@color/unpressed" />
+                    android:text="@string/spreadPlan"
+                    android:textColor="@color/unpressed"
+                    android:textSize="12sp" />
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/linear_voucherNum"
+                android:id="@+id/linearLayout_spreadCurrentDay"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_margin="@dimen/borderPaddingSmall"
                 android:layout_weight="1.0"
-                android:background="?selectableItemBackground"
+                android:background="@drawable/shape_round_corner_translucent_white"
+                android:gravity="center"
                 android:orientation="vertical"
-                android:paddingBottom="@dimen/borderPaddingBig"
-                android:paddingTop="@dimen/borderPaddingBig">
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
 
-
-                <TextView
-                    android:id="@+id/voucherNum"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textColor="@android:color/white" />
+                <com.duodian.admore.customview.CurrentPlanView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="@string/resourceVoucher"
-                    android:textColor="@color/unpressed" />
+                    android:text="@string/spreadToday"
+                    android:textColor="@color/unpressed"
+                    android:textSize="12sp" />
             </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_spreadHistory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/borderPaddingSmall"
+                android:layout_weight="1.0"
+                android:background="@drawable/shape_round_corner_translucent_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <com.duodian.admore.customview.ClockView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/spreadHistory"
+                    android:textColor="@color/unpressed"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
         </LinearLayout>
-    </LinearLayout>
 
-    <LinearLayout
-        android:id="@+id/linear_resourcePurchase"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="?selectableItemBackground">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/unpressedLight"
+            android:gravity="center_vertical"
+            android:paddingBottom="6dp"
+            android:paddingLeft="18dp"
+            android:paddingTop="6dp"
+            android:text="@string/spreadPlay"
+            android:textColor="@color/colorPrimary"
+            android:textSize="@dimen/titleSizeSmall"
+            android:textStyle="bold" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/dark"
-            android:gravity="center"
-            android:orientation="horizontal"
-            android:padding="10dp">
+            android:layout_marginBottom="@dimen/borderPaddingSmall"
+            android:layout_marginLeft="@dimen/borderPaddingBig"
+            android:layout_marginRight="@dimen/borderPaddingBig"
+            android:layout_marginTop="@dimen/borderPaddingSmall"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/linearLayout_spreadPlayCreate"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:contentDescription="@null"
-                android:src="@drawable/ic_add_white_24dp"
-                android:tint="@android:color/white" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/borderPaddingSmall"
+                android:layout_weight="1.0"
+                android:background="@drawable/shape_round_corner_translucent_white"
                 android:gravity="center"
-                android:paddingLeft="8dp"
-                android:text="@string/resourcePurchase"
-                android:textColor="@android:color/white"
-                android:textSize="@dimen/titleSize" />
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
 
+                <com.duodian.admore.customview.SpreadCreateView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:plus_color="@color/yellow" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/spreadCreate"
+                    android:textColor="@color/unpressed"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_spreadPlayPlan"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/borderPaddingSmall"
+                android:layout_weight="1.0"
+                android:background="@drawable/shape_round_corner_translucent_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+
+                <com.duodian.admore.customview.PlanView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:plan_color="@color/yellow" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/spreadPlayPlan"
+                    android:textColor="@color/unpressed"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_spreadPlayCurrentDay"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/borderPaddingSmall"
+                android:layout_weight="1.0"
+                android:background="@drawable/shape_round_corner_translucent_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <com.duodian.admore.customview.CurrentPlanView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:current_plan_color="@color/yellow" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/spreadPlanCurrentDay"
+                    android:textColor="@color/unpressed"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout_playSpreadHistory"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/borderPaddingSmall"
+                android:layout_weight="1.0"
+                android:background="@drawable/shape_round_corner_translucent_white"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingBottom="10dp"
+                android:paddingTop="10dp">
+
+                <com.duodian.admore.customview.ClockView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    app:pointer_color="@color/yellow" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:gravity="center"
+                    android:text="@string/spreadHistory"
+                    android:textColor="@color/unpressed"
+                    android:textSize="12sp" />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/unpressedLight"
-        android:gravity="center_vertical"
-        android:paddingBottom="4dp"
-        android:paddingLeft="18dp"
-        android:paddingTop="4dp"
-        android:text="@string/adSpread"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/titleSizeSmall"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/linearLayout_spreadCreate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="?selectableItemBackground"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-            <com.duodian.admore.customview.SpreadCreateView
-                android:layout_width="56dp"
-                android:layout_height="56dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/spreadCreate"
-                android:textColor="@color/unpressed" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout_spreadPlan"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="?selectableItemBackground"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-            <com.duodian.admore.customview.PlanView
-                android:layout_width="56dp"
-                android:layout_height="56dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/spreadPlan"
-                android:textColor="@color/unpressed" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout_spreadCurrentDay"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="?selectableItemBackground"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-            <com.duodian.admore.customview.CurrentPlanView
-                android:layout_width="56dp"
-                android:layout_height="56dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/spreadToday"
-                android:textColor="@color/unpressed" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout_spreadHistory"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="?selectableItemBackground"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-            <com.duodian.admore.customview.ClockView
-                android:layout_width="56dp"
-                android:layout_height="56dp" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/spreadHistory"
-                android:textColor="@color/unpressed" />
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/unpressedLight"
-        android:gravity="center_vertical"
-        android:paddingBottom="4dp"
-        android:paddingLeft="18dp"
-        android:paddingTop="4dp"
-        android:text="@string/spreadPlay"
-        android:textColor="@color/colorPrimary"
-        android:textSize="@dimen/titleSizeSmall"
-        android:textStyle="bold" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <LinearLayout
-            android:id="@+id/linearLayout_spreadPlayCreate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="?selectableItemBackground"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-            <com.duodian.admore.customview.SpreadCreateView
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                app:plus_color="@color/yellow" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/spreadCreate"
-                android:textColor="@color/unpressed" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout_spreadPlayPlan"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="?selectableItemBackground"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-
-            <com.duodian.admore.customview.PlanView
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                app:plan_color="@color/yellow" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/spreadPlayPlan"
-                android:textColor="@color/unpressed" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/linearLayout_spreadPlayCurrentDay"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0"
-            android:background="?selectableItemBackground"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp">
-
-            <com.duodian.admore.customview.CurrentPlanView
-                android:layout_width="56dp"
-                android:layout_height="56dp"
-                app:current_plan_color="@color/yellow" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="@string/spreadPlanCurrentDay"
-                android:textColor="@color/unpressed" />
-        </LinearLayout>
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1.0" />
-    </LinearLayout>
-</LinearLayout>
+</android.support.v4.widget.SwipeRefreshLayout>

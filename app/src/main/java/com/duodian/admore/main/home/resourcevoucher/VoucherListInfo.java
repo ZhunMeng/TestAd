@@ -1,4 +1,4 @@
-package com.duodian.admore.main.admore.resourcevoucher;
+package com.duodian.admore.main.home.resourcevoucher;
 
 import java.util.List;
 

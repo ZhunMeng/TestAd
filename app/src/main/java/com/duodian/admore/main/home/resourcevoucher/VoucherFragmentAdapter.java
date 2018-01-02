@@ -1,4 +1,4 @@
-package com.duodian.admore.main.admore.resourcevoucher;
+package com.duodian.admore.main.home.resourcevoucher;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;

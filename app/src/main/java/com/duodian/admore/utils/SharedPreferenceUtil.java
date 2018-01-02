@@ -35,4 +35,10 @@ public class SharedPreferenceUtil {
     public String getString(String key, String defaultValue) {
         return sharedPreferences.getString(key, defaultValue);
     }
+
+    public void clear() {
+        Editor editor = sharedPreferences.edit();
+        editor.clear();
+        editor.apply();
+    }
 }
