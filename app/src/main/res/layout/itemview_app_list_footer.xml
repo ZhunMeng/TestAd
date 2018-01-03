@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_itemView"
+    android:layout_width="match_parent"
+    android:layout_height="60dp"
+    android:background="?selectableItemBackground"
+    android:gravity="center"
+    android:orientation="horizontal">
+
+    <View
+        android:layout_width="60dp"
+        android:layout_height="1sp"
+        android:background="@color/grayF2" />
+
+    <TextView
+        android:id="@+id/textView_trackName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/borderPaddingBig"
+        android:layout_marginRight="@dimen/borderPaddingBig"
+        android:text="@string/end"
+        android:textColor="@color/grayF2"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="60dp"
+        android:layout_height="1sp"
+        android:background="@color/grayF2" />
+
+
+</LinearLayout>

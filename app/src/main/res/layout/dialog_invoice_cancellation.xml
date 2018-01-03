@@ -1,0 +1,58 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/borderPaddingBig"
+        android:text="@string/inputCancellationReason"
+        android:textColor="@android:color/black"
+        android:textSize="@dimen/titleSizeMiddle" />
+
+    <EditText
+        android:id="@+id/editText_cancellationReason"
+        android:layout_width="match_parent"
+        android:layout_height="168dp"
+        android:layout_marginLeft="@dimen/borderPaddingBig"
+        android:layout_marginRight="@dimen/borderPaddingBig"
+        android:background="@drawable/shape_round_corner_grayf2_edit"
+        android:gravity="top"
+        android:hint="@string/inputCancellationReason"
+        android:imeOptions="actionDone"
+        android:lines="8"
+        android:maxLines="8"
+        android:padding="@dimen/borderPadding"
+        android:textSize="@dimen/titleSizeSmall" />
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/borderPaddingSmall"
+        android:layout_marginLeft="@dimen/borderPaddingBig"
+        android:layout_marginRight="@dimen/borderPaddingBig"
+        android:layout_marginTop="@dimen/borderPaddingSmall"
+        android:gravity="end"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/button_cancel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/cancel"
+            android:textSize="16sp" />
+
+        <Button
+            android:id="@+id/button_confirm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/confirm"
+            android:textColor="@color/blue"
+            android:textSize="16sp" />
+    </LinearLayout>
+</LinearLayout>

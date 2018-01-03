@@ -1,0 +1,207 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/frame_contentParam"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="100dp">
+
+    <LinearLayout
+        android:id="@+id/linear_contentParam"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/borderPaddingBig"
+        android:background="@drawable/shape_round_corner_white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/borderPaddingBig"
+            android:text="@string/addContentParam"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/titleSizeMiddle"
+            android:textStyle="bold" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/borderPaddingBig"
+            android:layout_marginRight="@dimen/borderPaddingBig"
+            android:text="@string/contentParam"
+            android:textColor="@color/grayText1"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/editText_contentParam"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/borderPaddingBig"
+            android:layout_marginRight="@dimen/borderPaddingBig"
+            android:layout_marginTop="@dimen/borderPaddingMini"
+            android:background="@drawable/shape_round_corner_grayf2_edit"
+            android:hint="@string/inputContentParam"
+            android:lines="1"
+            android:padding="@dimen/borderPaddingMiddle"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/borderPaddingBig"
+            android:layout_marginRight="@dimen/borderPaddingBig"
+            android:layout_marginTop="@dimen/borderPaddingSmall"
+            android:text="@string/limit"
+            android:textColor="@color/grayText1"
+            android:textSize="12sp" />
+
+        <EditText
+            android:id="@+id/editText_limitNum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/borderPaddingBig"
+            android:layout_marginRight="@dimen/borderPaddingBig"
+            android:layout_marginTop="@dimen/borderPaddingMini"
+            android:background="@drawable/shape_round_corner_grayf2_edit"
+            android:hint="@string/num"
+            android:inputType="number"
+            android:lines="1"
+            android:maxLength="8"
+            android:padding="@dimen/borderPaddingMiddle"
+            android:singleLine="true"
+            android:textColor="@android:color/black"
+            android:textSize="14sp" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/borderPaddingSmall"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/borderPaddingBig"
+            android:paddingRight="@dimen/borderPaddingBig">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="@string/spreadDateTime"
+                android:textColor="@color/grayText1"
+                android:textSize="12sp" />
+
+            <View
+                android:layout_width="24dp"
+                android:layout_height="0dp" />
+
+            <CheckBox
+                android:id="@+id/checkbox_endDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:text="@string/spreadLongTerm"
+                android:textColor="@color/grayText1"
+                android:textSize="12sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/borderPaddingMini"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/borderPaddingBig"
+            android:paddingRight="@dimen/borderPaddingBig">
+
+            <TextView
+                android:id="@+id/textView_startDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/shape_round_corner_grayf2_edit"
+                android:gravity="center"
+                android:padding="@dimen/borderPaddingSmall"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="@dimen/borderPaddingSmall"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/borderPaddingSmall"
+                android:background="@color/grayF2" />
+
+            <TextView
+                android:id="@+id/textView_endDate"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/shape_round_corner_gray_light_padding_4_solid"
+                android:gravity="center"
+                android:padding="@dimen/borderPaddingSmall"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/borderPaddingSmall"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/borderPaddingBig"
+            android:paddingRight="@dimen/borderPaddingBig">
+
+            <TextView
+                android:id="@+id/textView_startDateTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/shape_round_corner_grayf2_edit"
+                android:gravity="center"
+                android:padding="@dimen/borderPaddingSmall"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="@dimen/borderPaddingSmall"
+                android:layout_height="1dp"
+                android:layout_margin="@dimen/borderPaddingSmall"
+                android:background="@color/grayF2" />
+
+            <TextView
+                android:id="@+id/textView_endDateTime"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@drawable/shape_round_corner_grayf2_edit"
+                android:gravity="center"
+                android:padding="@dimen/borderPaddingSmall"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:layout_marginTop="@dimen/borderPadding36dp"
+            android:background="@color/grayF2" />
+
+        <TextView
+            android:id="@+id/textView_addComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:gravity="center"
+            android:padding="@dimen/borderPadding"
+            android:text="@string/addComplete"
+            android:textColor="@color/blue"
+            android:textSize="@dimen/titleSizeMiddle"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+
+</FrameLayout>

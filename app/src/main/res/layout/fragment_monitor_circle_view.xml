@@ -1,0 +1,86 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.duodian.admore.monitor.detail.MonitorCircleViewFragment">
+
+    <LinearLayout
+        android:id="@+id/linear_track"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/borderPaddingBig"
+            android:layout_marginRight="@dimen/borderPaddingBig"
+            android:background="@drawable/shape_gradient_rect_gray_background"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/borderPaddingSmall"
+            android:paddingLeft="@dimen/borderPadding"
+            android:paddingRight="@dimen/borderPadding"
+            android:paddingTop="@dimen/borderPaddingSmall">
+
+            <ImageView
+                android:id="@+id/imageView_smallIcon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/textView_trackName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:textColor="@color/translucent_white"
+                android:textSize="@dimen/titleSizeSmall"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/frame_completionRate"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_gravity="bottom|end"
+        android:layout_marginLeft="@dimen/borderPaddingBig"
+        android:layout_marginRight="@dimen/borderPaddingBig">
+
+        <TextView
+            android:id="@+id/textView_completionRate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:lineSpacingExtra="0dp"
+            android:textColor="@android:color/white"
+            android:textSize="28sp"
+            android:visibility="invisible" />
+
+    </FrameLayout>
+
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/lineChart"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal"
+        android:visibility="invisible" />
+
+    <com.duodian.admore.monitor.detail.MonitorDetailView
+        android:id="@+id/monitorDetailView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center_horizontal">
+
+    </com.duodian.admore.monitor.detail.MonitorDetailView>
+
+
+</FrameLayout>

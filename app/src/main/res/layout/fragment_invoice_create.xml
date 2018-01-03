@@ -1,0 +1,265 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <android.support.v4.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="?selectableItemBackground"
+                    android:padding="@dimen/borderPaddingBig">
+
+                    <TextView
+                        android:id="@+id/textView_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_toLeftOf="@+id/textView_phone"
+                        android:layout_toStartOf="@+id/textView_phone"
+                        android:textSize="@dimen/titleSizeSmall" />
+
+
+                    <TextView
+                        android:id="@+id/textView_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toLeftOf="@+id/imageView_next"
+                        android:layout_toStartOf="@+id/imageView_next"
+                        android:paddingLeft="@dimen/borderPaddingSmall"
+                        android:paddingRight="@dimen/borderPaddingSmall"
+                        android:textSize="@dimen/titleSizeSmall" />
+
+                    <TextView
+                        android:id="@+id/textView_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_alignParentStart="true"
+                        android:layout_below="@+id/textView_name"
+                        android:layout_marginTop="@dimen/borderPadding"
+                        android:layout_toLeftOf="@+id/imageView_next"
+                        android:layout_toStartOf="@+id/imageView_next"
+                        android:textSize="@dimen/titleSizeSmall" />
+
+                    <ImageView
+                        android:id="@+id/imageView_next"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/borderPaddingBig"
+                        android:layout_marginStart="@dimen/borderPaddingBig"
+                        android:src="@drawable/ic_navigate_next_black_24dp"
+                        android:tint="@color/grayC7" />
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/grayF2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/borderPaddingBig"
+                    android:paddingRight="@dimen/borderPaddingBig">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invoiceTitle"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/titleSizeSmall" />
+
+                    <TextView
+                        android:id="@+id/textView_invoiceTitle"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:gravity="right"
+                        android:textSize="@dimen/titleSizeSmall"
+                        tools:ignore="RtlHardcoded" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/grayF2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/borderPaddingBig"
+                    android:paddingRight="@dimen/borderPaddingBig">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invoiceTitleType"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/titleSizeSmall" />
+
+                    <TextView
+                        android:id="@+id/textView_invoiceTitleType"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:gravity="right"
+                        android:textSize="@dimen/titleSizeSmall"
+                        tools:ignore="RtlHardcoded" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/grayF2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/borderPaddingBig"
+                    android:paddingRight="@dimen/borderPaddingBig">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invoiceType"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/titleSizeSmall" />
+
+                    <TextView
+                        android:id="@+id/textView_invoiceType"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:gravity="right"
+                        android:textSize="@dimen/titleSizeSmall"
+                        tools:ignore="RtlHardcoded" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/grayF2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/borderPaddingBig"
+                    android:paddingRight="@dimen/borderPaddingBig">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/invoiceTotal"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/titleSizeSmall" />
+
+                    <TextView
+                        android:id="@+id/textView_invoiceTotal"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:gravity="right"
+                        android:textSize="@dimen/titleSizeSmall"
+                        tools:ignore="RtlHardcoded" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/grayF2" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/borderPaddingBig"
+                    android:paddingRight="@dimen/borderPaddingBig">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:text="@string/invoiceCreateAmount"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/titleSizeSmall" />
+
+                    <EditText
+                        android:id="@+id/editText_invoiceCreateAmount"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1.0"
+                        android:background="@android:color/transparent"
+                        android:gravity="right"
+                        android:hint="@string/invoiceCreateAmountHint"
+                        android:inputType="numberDecimal"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textSize="@dimen/titleSizeMiddle" />
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1sp"
+                    android:background="@color/grayF2" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="92dp"
+                    android:layout_marginLeft="@dimen/borderPaddingBig"
+                    android:layout_marginRight="@dimen/borderPaddingBig"
+                    android:layout_marginTop="56dp"
+                    android:background="@drawable/shape_round_corner_stroke_translucent_0c"
+                    android:padding="@dimen/borderPaddingBig"
+                    android:text="@string/invoiceHint"
+                    android:textSize="12sp" />
+
+
+            </LinearLayout>
+        </android.support.v4.widget.NestedScrollView>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <Button
+        android:id="@+id/button_invoiceRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:layout_margin="@dimen/borderPaddingBig"
+        android:background="@drawable/shape_gradient_round_corner_blue"
+        android:text="@string/invoiceRequest"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/titleSizeMiddle" />
+</FrameLayout>
+

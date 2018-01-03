@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_itemView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/linear_spread_start"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/borderPaddingBig"
+        android:paddingTop="@dimen/borderPaddingBig">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="@dimen/borderPaddingMini"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_play_arrow_green_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spreadNow" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_spread_pause"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/borderPaddingBig"
+        android:paddingTop="@dimen/borderPaddingBig">
+
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="@dimen/borderPaddingMini"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_pause_red_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spreadPause" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear_spread_stop"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.0"
+        android:background="?selectableItemBackground"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/borderPaddingBig"
+        android:paddingTop="@dimen/borderPaddingBig">
+
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_margin="@dimen/borderPaddingMini"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_stop_stop_24dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/spreadStop" />
+    </LinearLayout>
+
+
+</LinearLayout>

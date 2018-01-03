@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.duodian.admore.account.verification.VerificationActivity">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/view_email"
+            layout="@layout/view_verify_email" />
+
+        <include
+            android:id="@+id/view_phone"
+            layout="@layout/view_verify_phone" />
+
+        <include
+            android:id="@+id/view_question"
+            layout="@layout/view_verify_question" />
+
+        <include
+            android:id="@+id/view_weChat"
+            layout="@layout/view_verify_wechat" />
+
+        <include
+            android:id="@+id/view_password"
+            layout="@layout/view_password_reset" />
+
+        <include
+            android:id="@+id/view_phone_reset"
+            layout="@layout/view_phone_reset" />
+
+        <include
+            android:id="@+id/view_reset_success"
+            layout="@layout/view_reset_success" />
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/button_next"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/borderPaddingBig"
+        android:layout_marginRight="@dimen/borderPaddingBig"
+        android:layout_marginTop="30dp"
+        android:background="@drawable/selector_button_login"
+        android:enabled="false"
+        android:text="@string/next"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/titleSizeMiddle" />
+
+</LinearLayout>

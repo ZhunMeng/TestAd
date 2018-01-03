@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linear_itemView"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
+    android:gravity="center_vertical"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/borderPaddingSmall"
+    android:paddingLeft="@dimen/borderPaddingBig"
+    android:paddingRight="@dimen/borderPaddingBig"
+    android:paddingTop="@dimen/borderPaddingBig">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/textView_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1.0"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/titleSizeSmall" />
+
+        <TextView
+            android:id="@+id/textView_phone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/titleSizeSmall" />
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/textView_realAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/borderPadding"
+        android:textSize="14sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/borderPadding"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/checkbox_select"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="-6dp"
+            android:text="@string/setDefault" />
+
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1.0" />
+
+        <Button
+            android:id="@+id/button_update"
+            android:layout_width="56dp"
+            android:layout_height="30dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/edit"
+            android:textColor="@android:color/black"
+            android:textSize="@dimen/titleSizeSmall" />
+
+        <Button
+            android:id="@+id/button_delete"
+            android:layout_width="56dp"
+            android:layout_height="30dp"
+            android:background="?android:attr/selectableItemBackground"
+            android:text="@string/delete"
+            android:textColor="@color/red"
+            android:textSize="@dimen/titleSizeSmall" />
+    </LinearLayout>
+
+</LinearLayout>

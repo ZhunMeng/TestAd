@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/frame_selectIdBusinessImage"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_margin="@dimen/borderPaddingBig"
+            android:background="@drawable/shape_round_corner_gray_light">
+
+            <ImageView
+                android:id="@+id/imageView_Business"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:contentDescription="@null"
+                android:scaleType="centerCrop" />
+
+            <TextView
+                android:id="@+id/textView_business_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/clickToSelectBusinessImage" />
+
+
+        </FrameLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/borderPaddingBig"
+            android:paddingRight="@dimen/borderPaddingBig">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/realName"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
+
+            <EditText
+                android:id="@+id/editText_realName_business"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@android:color/transparent"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingEnd="@dimen/borderPaddingBig"
+                android:paddingLeft="@dimen/borderPaddingBig"
+                android:paddingRight="@dimen/borderPaddingBig"
+                android:paddingStart="@dimen/borderPaddingBig"
+                android:singleLine="true"
+                android:textSize="@dimen/titleSizeMiddle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/borderPaddingBig"
+            android:paddingRight="@dimen/borderPaddingBig">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/organizationCode"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
+
+            <EditText
+                android:id="@+id/editText_organizationCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@android:color/transparent"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingEnd="@dimen/borderPaddingBig"
+                android:paddingLeft="@dimen/borderPaddingBig"
+                android:paddingRight="@dimen/borderPaddingBig"
+                android:paddingStart="@dimen/borderPaddingBig"
+                android:singleLine="true"
+                android:textSize="@dimen/titleSizeMiddle" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingLeft="@dimen/borderPaddingBig"
+            android:paddingRight="@dimen/borderPaddingBig">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/businessCode"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/titleSizeSmall" />
+
+            <EditText
+                android:id="@+id/editText_businessCode"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:background="@android:color/transparent"
+                android:inputType="text"
+                android:maxLines="1"
+                android:paddingEnd="@dimen/borderPaddingBig"
+                android:paddingLeft="@dimen/borderPaddingBig"
+                android:paddingRight="@dimen/borderPaddingBig"
+                android:paddingStart="@dimen/borderPaddingBig"
+                android:singleLine="true"
+                android:textSize="@dimen/titleSizeMiddle" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/button_enterprise_commit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/borderPaddingBig"
+            android:layout_marginLeft="@dimen/borderPaddingBig"
+            android:layout_marginRight="@dimen/borderPaddingBig"
+            android:layout_marginTop="30dp"
+            android:background="@drawable/selector_button_login"
+            android:text="@string/confirm"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/titleSizeMiddle" />
+    </LinearLayout>
+</ScrollView>

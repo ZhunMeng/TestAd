@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical"
+    tools:context="com.duodian.admore.account.verification.VerificationTypeActivity">
+
+    <include layout="@layout/layout_toolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/linear_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/borderPadding">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verification_email"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/titleSizeSmall" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/borderPaddingSmall"
+                    android:text="@string/verification_email_hint"
+                    android:textColor="@color/grayA3"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/borderPadding"
+                android:layout_marginStart="@dimen/borderPadding"
+                android:src="@drawable/ic_navigate_next_black_24dp"
+                android:tint="@color/grayC7" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:layout_marginLeft="@dimen/borderPadding"
+            android:layout_marginStart="@dimen/borderPadding"
+            android:background="@color/grayF2" />
+
+
+        <LinearLayout
+            android:id="@+id/linear_phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/borderPadding">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verification_phone"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/titleSizeSmall" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/borderPaddingSmall"
+                    android:text="@string/verification_phone_hint"
+                    android:textColor="@color/grayA3"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/borderPadding"
+                android:layout_marginStart="@dimen/borderPadding"
+                android:src="@drawable/ic_navigate_next_black_24dp"
+                android:tint="@color/grayC7" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:layout_marginLeft="@dimen/borderPadding"
+            android:layout_marginStart="@dimen/borderPadding"
+            android:background="@color/grayF2" />
+
+        <LinearLayout
+            android:id="@+id/linear_weChat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/borderPadding">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verification_weChat"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/titleSizeSmall" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/borderPaddingSmall"
+                    android:text="@string/verification_weChat_hint"
+                    android:textColor="@color/grayA3"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/borderPadding"
+                android:layout_marginStart="@dimen/borderPadding"
+                android:src="@drawable/ic_navigate_next_black_24dp"
+                android:tint="@color/grayC7" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:layout_marginLeft="@dimen/borderPadding"
+            android:layout_marginStart="@dimen/borderPadding"
+            android:background="@color/grayF2" />
+
+        <LinearLayout
+            android:id="@+id/linear_question"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="@dimen/borderPadding">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1.0"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/verification_question"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/titleSizeSmall" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/borderPaddingSmall"
+                    android:text="@string/verification_question_hint"
+                    android:textColor="@color/grayA3"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/borderPadding"
+                android:layout_marginStart="@dimen/borderPadding"
+                android:src="@drawable/ic_navigate_next_black_24dp"
+                android:tint="@color/grayC7" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1sp"
+            android:background="@color/grayF2" />
+    </LinearLayout>
+
+</LinearLayout>
